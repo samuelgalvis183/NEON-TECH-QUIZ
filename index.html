@@ -5,7 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>NEON TECH QUIZ - Samuel Galvis</title>
   <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;900&family=Rajdhani:wght@500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
   <style>
     * { margin:0; padding:0; box-sizing:border-box; }
     body {
@@ -67,7 +66,6 @@
       font-weight: 600;
     }
 
-    /* Temas */
     .temas {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -112,10 +110,7 @@
       text-align: center;
       box-shadow: 0 0 20px rgba(0,255,255,0.3);
     }
-    input#nombre::placeholder {
-      color: #00ffff;
-      opacity: 0.8;
-    }
+    input#nombre::placeholder { color: #00ffff; opacity: 0.8; }
 
     .btn {
       padding: 16px 40px;
@@ -131,11 +126,7 @@
       text-transform: uppercase;
       letter-spacing: 2px;
     }
-    .btn:hover {
-      background: #00ffff;
-      color: #000;
-      box-shadow: 0 0 30px #00ffff;
-    }
+    .btn:hover { background: #00ffff; color: #000; box-shadow: 0 0 30px #00ffff; }
     .btn-primary { border-color: #ff00ff; color: #ff00ff; }
     .btn-primary:hover { background: #ff00ff; color: #fff; }
 
@@ -187,34 +178,16 @@
       <p class="proposito">Desafío de conocimiento tecnológico nivel intermedio. ¿Estás listo para entrar en la red?</p>
 
       <div class="temas">
-        <div class="tema">
-          <h3>Hardware</h3>
-          <p>CPU, RAM, SSD vs HDD, GPU, placas base, overclocking, refrigeración líquida, arquitectura x86-64 vs ARM.</p>
-        </div>
-        <div class="tema">
-          <h3>Programación</h3>
-          <p>Variables, funciones, estructuras de control, OOP, APIs REST, JSON, Git, MVC, async/await.</p>
-        </div>
-        <div class="tema">
-          <h3>Redes</h3>
-          <p>Modelo OSI y TCP/IP, direcciones IP públicas/privadas, subredes, DNS, puertos comunes, NAT, VLANs.</p>
-        </div>
-        <div class="tema">
-          <h3>Seguridad</h3>
-          <p>HTTPS/TLS, VPN, JWT, CORS, XSS, SQL Injection, cifrado simétrico/asimétrico, firewall, 2FA.</p>
-        </div>
-        <div class="tema">
-          <h3>Cloud & Web</h3>
-          <p>CDN, WebSockets, DOM, frameworks (React, Express), bases de datos NoSQL, microservicios, Docker básico.</p>
-        </div>
-        <div class="tema">
-          <h3>Sistemas</h3>
-          <p>Linux vs Windows, comandos básicos (ip, ps, git), procesos, permisos, SSH, servicios, contenedores.</p>
-        </div>
+        <div class="tema"><h3>Hardware</h3><p>CPU, RAM, SSD vs HDD, GPU, placas base, overclocking, refrigeración líquida, arquitectura x86-64 vs ARM.</p></div>
+        <div class="tema"><h3>Programación</h3><p>Variables, funciones, estructuras de control, OOP, APIs REST, JSON, Git, MVC, async/await.</p></div>
+        <div class="tema"><h3>Redes</h3><p>Modelo OSI y TCP/IP, direcciones IP públicas/privadas, subredes, DNS, puertos comunes, NAT, VLANs.</p></div>
+        <div class="tema"><h3>Seguridad</h3><p>HTTPS/TLS, VPN, JWT, CORS, XSS, SQL Injection, cifrado simétrico/asimétrico, firewall, 2FA.</p></div>
+        <div class="tema"><h3>Cloud & Web</h3><p>CDN, WebSockets, DOM, frameworks (React, Express), bases de datos NoSQL, microservicios, Docker básico.</p></div>
+        <div class="tema"><h3>Sistemas</h3><p>Linux vs Windows, comandos básicos (ip, ps, git), procesos, permisos, SSH, servicios, contenedores.</p></div>
       </div>
 
       <input type="text" id="nombre" placeholder="INGRESA TU ALIAS">
-      <div style="text-align:center;">
+      <div style="text-align:center; margin-top:40px;">
         <button class="btn btn-primary" onclick="iniciarCuestionario()">INICIAR SISTEMA</button>
       </div>
     </div>
@@ -258,7 +231,7 @@
   </div>
 
   <script>
-    // === TODAS LAS 40 PREGUNTAS COMPLETAS (exactamente como tú las tenías) ===
+    // === LAS 40 PREGUNTAS COMPLETAS ===
     const preguntas = [
       { q: "¿Qué capa del modelo OSI maneja el enrutamiento?", a: "Capa 3 (Red)", opciones: ["Capa 2 (Enlace)", "Capa 3 (Red)", "Capa 4 (Transporte)", "Capa 7 (Aplicación)"], pista: "Es donde operan los routers y las direcciones IP." },
       { q: "¿Qué puerto usa HTTPS por defecto?", a: "443", opciones: ["80", "443", "22", "3389"], pista: "Es el puerto seguro, la versión cifrada de HTTP." },
@@ -287,7 +260,7 @@
       { q: "¿Qué significa OOP?", a: "Object-Oriented Programming", opciones: ["Order of Operations Programming", "Object-Oriented Programming", "Open Online Programming", "Original Object Protocol"], pista: "Clases, objetos, herencia, polimorfismo..." },
       { q: "¿Qué protocolo usa el correo entrante seguro con cifrado?", a: "IMAPS", opciones: ["IMAP", "POP3", "IMAPS", "SMTPS"], pista: "IMAP sobre SSL/TLS, puerto 993." },
       { q: "¿Qué significa IPv6?", a: "Internet Protocol versión 6", opciones: ["Improved Protocol v6", "Internet Protocol versión 6", "International Protocol v6", "Internet Packet v6"], pista: "Direcciones de 128 bits, como 2001:0db8::1" },
-      { q: "¿Qué framework backend de Node.js es minimalista?", a: "Express", opciones: ["NestJS", "Koa",Passenger "Express", "Fastify"], pista: "El más usado y sencillo para crear APIs." },
+      { q: "¿Qué framework backend de Node.js es minimalista?", a: "Express", opciones: ["NestJS", "Koa", "Express", "Fastify"], pista: "El más usado y sencillo para crear APIs." },
       { q: "¿Qué significa SQL?", a: "Structured Query Language", opciones: ["Simple Query Language", "Structured Query Language", "System Query Language", "Standard Query Language"], pista: "Lenguaje para bases de datos relacionales." },
       { q: "¿Qué comando muestra la tabla de rutas en Linux?", a: "ip route", opciones: ["route", "netstat -r", "ip route", "traceroute"], pista: "Comando moderno en Linux." },
       { q: "¿Qué significa CORS?", a: "Cross-Origin Resource Sharing", opciones: ["Client-Origin Resource Sharing", "Cross-Origin Resource Sharing", "Common Origin Request System", "Cache Origin Resource"], pista: "Permite o bloquea peticiones entre dominios distintos." },
@@ -302,12 +275,7 @@
       { q: "¿Qué puerto usa RDP (Escritorio Remoto Windows)?", a: "3389", opciones: ["3389", "5900", "22", "3390"], pista: "Puerto por defecto de Remote Desktop Protocol." }
     ];
 
-    // === TU CÓDIGO JS ORIGINAL 100% INTACTO ===
-    let nombre = "";
-    let preguntasSel = [];
-    let indice = 0;
-    let respuestas = [];
-    let usos5050 = 5;
+    let nombre = "", preguntasSel = [], indice = 0, respuestas = [], usos5050 = 5;
     let intentosTotales = parseInt(localStorage.getItem("intentosCuestionario") || "0");
 
     function iniciarCuestionario() {
@@ -410,6 +378,8 @@
       });
       document.getElementById("resumen").innerHTML = html;
     }
+
+    // Ya no hay referencia a "intentosTotales" en el HTML → no hay error al cargar
   </script>
 </body>
 </html>
