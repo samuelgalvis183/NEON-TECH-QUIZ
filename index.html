@@ -3,153 +3,205 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cuestionario de Tecnología - Nivel Intermedio</title>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <title>Cuestionario de Tecnología - Samuel Galvis</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
     <style>
         :root {
-            --primary: #4361ee;
-            --primary-dark: #3a56d4;
+            --primary: #5e60ce;
+            --primary-light: #7274d9;
+            --accent: #48bfe3;
             --success: #06d6a0;
-            --danger: #ef476f;
-            --warning: #ffd166;
-            --dark: #2b2d42;
-            --light: #f8f9fa;
-            --gray: #8d99ae;
+            --danger: #f25a6d;
+            --dark: #1e1e2e;
+            --gray: #94a3b8;
+            --light: #f8fafc;
+            --border: #e2e8f0;
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
-            font-family: 'Poppins', sans-serif;
+            font-family: 'Inter', sans-serif;
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
             padding: 20px;
             color: var(--dark);
         }
 
         .container {
-            max-width: 800px;
-            margin: 0 auto;
+            width: 100%;
+            max-width: 850px;
             background: white;
-            border-radius: 20px;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            border-radius: 24px;
+            box-shadow: 0 25px 60px rgba(0,0,0,0.15);
             overflow: hidden;
         }
 
         .header {
-            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            background: linear-gradient(135deg, var(--primary), var(--primary-light));
             color: white;
-            padding: 30px 20px;
+            padding: 40px 30px;
             text-align: center;
+            position: relative;
         }
 
         .header h1 {
-            font-size: 2.2rem;
-            margin-bottom: 10px;
+            font-size: 2.5rem;
+            font-weight: 800;
+            margin-bottom: 8px;
+        }
+
+        .header p {
+            opacity: 0.95;
+            font-size: 1.1rem;
+        }
+
+        .author {
+            position: absolute;
+            bottom: 12px;
+            right: 20px;
+            font-size: 0.9rem;
+            opacity: 0.9;
         }
 
         .progress-container {
-            background: rgba(255,255,255,0.2);
-            height: 10px;
-            border-radius: 5px;
-            margin: 20px 40px;
+            height: 8px;
+            background: rgba(255,255,255,0.25);
+            margin: 25px 40px 0;
+            border-radius: 4px;
             overflow: hidden;
         }
 
         .progress-bar {
             height: 100%;
-            background: var(--success);
+            background: var(--accent);
             width: 0%;
-            border-radius: 5px;
-            transition: width 0.4s ease;
+            border-radius: 4px;
+            transition: width 0.5s cubic-bezier(0.65, 0, 0.35, 1);
         }
 
         .content {
-            padding: 40px;
-            min-height: 500px;
+            padding: 50px 40px;
+            min-height: 520px;
         }
 
-        .intro {
+        /* Pantalla de bienvenida con nombre */
+        .welcome {
             text-align: center;
-            animation: fadeIn 0.8s;
+            max-width: 600px;
+            margin: 0 auto;
         }
 
-        .intro h2 { font-size: 1.8rem; margin-bottom: 20px; color: var(--primary); }
-        .intro p { font-size: 1.1rem; line-height: 1.8; color: var(--gray); margin: 15px 0; }
-
-        .topics {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 12px;
-            justify-content: center;
-            margin: 25px 0;
-        }
-
-        .topic-tag {
-            background: #e0e7ff;
-            color: var(--primary);
-            padding: 10px 18px;
-            border-radius: 50px;
-            font-weight: 600;
-            font-size: 0.95rem;
-        }
-
-        .question-card {
-            background: #f8f9ff;
-            padding: 30px;
-            border-radius: 16px;
-            box-shadow: 0 8px 25px rgba(67, 97, 238, 0.1);
-            animation: fadeInUp 0.6s;
-        }
-
-        .question-number {
-            color: var(--primary);
-            font-weight: 700;
-            font-size: 1.3rem;
+        .welcome h2 {
+            font-size: 2.2rem;
             margin-bottom: 20px;
+            color: var(--primary);
+        }
+
+        .welcome p {
+            font-size: 1.15rem;
+            color: var(--gray);
+            line-height: 1.7;
+            margin-bottom: 30px;
+        }
+
+        .name-input {
+            width: 100%;
+            max-width: 420px;
+            padding: 16px 20px;
+            font-size: 1.2rem;
+            border: 2px solid var(--border);
+            border-radius: 14px;
+            margin: 20px auto;
+            display: block;
+            text-align: center;
+            transition: all 0.3s;
+        }
+
+        .name-input:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 4px rgba(94, 96, 206, 0.15);
+        }
+
+        .topics-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 16px;
+            margin: 35px 0;
+        }
+
+        .topic {
+            background: linear-gradient(135deg, #e0e7ff, #c3dafe);
+            padding: 18px;
+            border-radius: 16px;
+            text-align: center;
+            font-weight: 600;
+            color: var(--primary);
+            box-shadow: 0 6px 15px rgba(94,96,206,0.1);
+        }
+
+        /* Pregunta */
+        .question-card {
+            background: #fafbff;
+            padding: 35px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(94,96,206,0.08);
+        }
+
+        .question-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 25px;
+            color: var(--primary);
+            font-weight: 600;
         }
 
         .question-text {
-            font-size: 1.4rem;
+            font-size: 1.5rem;
             font-weight: 600;
-            margin-bottom: 25px;
-            line-height: 1.5;
+            line-height: 1.6;
+            margin-bottom: 30px;
         }
 
         .options {
             display: grid;
-            gap: 16px;
+            gap: 18px;
         }
 
         .option {
             background: white;
-            padding: 18px 20px;
-            border-radius: 12px;
-            border: 2px solid #e2e8f0;
+            padding: 20px;
+            border-radius: 16px;
+            border: 2px solid var(--border);
             cursor: pointer;
-            transition: all 0.3s;
+            transition: all 0.3s ease;
             display: flex;
             align-items: center;
-            gap: 14px;
-            font-size: 1.1rem;
+            gap: 16px;
+            font-size: 1.15rem;
         }
 
         .option:hover {
             border-color: var(--primary);
-            background: #f0f4ff;
-            transform: translateY(-2px);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(94,96,206,0.12);
         }
 
         .option input[type="radio"] {
-            width: 22px;
-            height: 22px;
+            width: 24px;
+            height: 24px;
             accent-color: var(--primary);
         }
 
         .option.selected {
             border-color: var(--primary);
-            background: #ebf0ff;
-            box-shadow: 0 0 0 4px rgba(67, 97, 238, 0.15);
+            background: #eef2ff;
+            box-shadow: 0 0 0 5px rgba(94,96,206,0.15);
         }
 
         .navigation {
@@ -159,9 +211,9 @@
         }
 
         button {
-            padding: 14px 32px;
+            padding: 16px 36px;
             border: none;
-            border-radius: 12px;
+            border-radius: 14px;
             font-weight: 600;
             font-size: 1.1rem;
             cursor: pointer;
@@ -169,24 +221,24 @@
         }
 
         .btn-prev {
-            background: var(--gray);
-            color: white;
+            background: #e2e8f0;
+            color: var(--dark);
         }
 
         .btn-prev:hover:not(:disabled) {
-            background: #6c757d;
+            background: #cbd5e1;
             transform: translateY(-2px);
         }
 
-        .btn-next, .btn-start, .btn-restart {
+        .btn-primary {
             background: var(--primary);
             color: white;
         }
 
-        .btn-next:hover, .btn-start:hover, .btn-restart:hover {
-            background: var(--primary-dark);
+        .btn-primary:hover {
+            background: #5a5cc4;
             transform: translateY(-3px);
-            box-shadow: 0 10px 20px rgba(67, 97, 238, 0.3);
+            box-shadow: 0 12px 25px rgba(94,96,206,0.35);
         }
 
         button:disabled {
@@ -195,169 +247,30 @@
             transform: none !important;
         }
 
+        /* Resultado final */
         .result {
             text-align: center;
-            animation: fadeIn 1s;
+        }
+
+        .greeting {
+            font-size: 2rem;
+            margin-bottom: 10px;
+            color: var(--primary);
         }
 
         .score-circle {
-            width: 150px;
-            height: 150px;
+            width: 180px;
+            height: 180px;
             border-radius: 50%;
             display: flex;
+            flex-direction: column;
             align-items: center;
             justify-content: center;
             margin: 30px auto;
-            font-size: 2.5rem;
-            font-weight: 700;
+            font-weight: 800;
             color: white;
+            font-size: 3rem;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.2);
         }
 
-        .excellent { background: var(--success); }
-        .good { background: var(--warning); color: var(--dark); }
-        .regular { background: #ffa726; }
-        .low { background: var(--danger); }
-
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
-        }
-
-        @keyframes fadeInUp {
-            from { opacity: 0; transform: translateY(30px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        @media (max-width: 600px) {
-            .container { margin: 10px; border-radius: 16px; }
-            .content { padding: 25px; }
-            .header h1 { font-size: 1.8rem; }
-            .question-text { font-size: 1.2rem; }
-        }
-    </style>
-</head>
-<body>
-    <div class="container">
-        <div class="header">
-            <h1>Cuestionario de Tecnología</h1>
-            <p>Nivel Intermedio • 20 preguntas</p>
-            <div class="progress-container">
-                <div class="progress-bar" id="progress"></div>
-            </div>
-        </div>
-
-        <div class="content" id="content">
-            <!-- El contenido se genera con JavaScript -->
-        </div>
-    </div>
-
-    <script>
-        const questionsDB = [ /* ← Mismo array de 40 preguntas que te di antes */ ];
-        // (Para no hacer el código eterno, copio solo el inicio y fin, pero debes pegar las 40 preguntas completas aquí)
-        // ... [pega aquí las 40 preguntas del código anterior] ...
-
-        // Seleccionar 20 aleatorias
-        function getRandomQuestions() {
-            const shuffled = [...questionsDB].sort(() => 0.5 - Math.random());
-            return shuffled.slice(0, 20);
-        }
-
-        let questions = getRandomQuestions();
-        let currentIndex = -1;
-        let answers = new Array(20).fill(null);
-
-        const purpose = "El propósito de este cuestionario es evaluar y reforzar tus conocimientos intermedios en tecnología, redes, hardware, software e historia tecnológica de forma divertida y educativa.";
-        const topics = ["Tecnología General", "Redes Informáticas", "Hardware", "Desarrollo de Software", "Historia de la Tecnología"];
-
-        function updateProgress() {
-            const percent = currentIndex < 0 ? 0 : currentIndex === 20 ? 100 : (currentIndex / 20) * 100;
-            document.getElementById('progress').style.width = percent + '%';
-        }
-
-        function renderContent() {
-            const content = document.getElementById('content');
-            content.innerHTML = '';
-            updateProgress();
-
-            if (currentIndex === -1) {
-                // Pantalla de inicio
-                content.innerHTML = `
-                    <div class="intro">
-                        <h2>¡Bienvenido al cuestionario!</h2>
-                        <p>${purpose}</p>
-                        <div class="topics">
-                            ${topics.map(t => `<span class="topic-tag">${t}</span>`).join('')}
-                        </div>
-                        <button class="btn-start">Comenzar Cuestionario</button>
-                    </div>`;
-                content.querySelector('.btn-start').onclick = () => { currentIndex = 0; renderContent(); };
-
-            } else if (currentIndex < 20) {
-                // Pregunta
-                const q = questions[currentIndex];
-                content.innerHTML = `
-                    <div class="question-card">
-                        <div class="question-number">Pregunta ${currentIndex + 1} de 20</div>
-                        <div class="question-text">${q.question}</div>
-                        <div class="options">
-                            ${q.options.map((opt, i) => `
-                                <label class="option ${answers[currentIndex] === i ? 'selected' : ''}">
-                                    <input type="radio" name="q" value="${i}" ${answers[currentIndex] === i ? 'checked' : ''}>
-                                    <span>${opt}</span>
-                                </label>
-                            `).join('')}
-                        </div>
-                        <div class="navigation">
-                            <button class="btn-prev" ${currentIndex === 0 ? 'disabled' : ''}>Atrás</button>
-                            <button class="btn-next">${currentIndex === 19 ? 'Finalizar' : 'Siguiente'}</button>
-                        </div>
-                    </div>`;
-
-                // Eventos
-                content.querySelectorAll('input[type="radio"]').forEach(radio => {
-                    radio.onchange = () => {
-                        answers[currentIndex] = parseInt(radio.value);
-                        renderContent(); // Para resaltar la opción seleccionada
-                    };
-                });
-
-                content.querySelector('.btn-prev').onclick = () => { currentIndex--; renderContent(); };
-                content.querySelector('.btn-next').onclick = () => {
-                    currentIndex++;
-                    renderContent();
-                };
-
-            } else {
-                // Resultado final
-                let correct = 0;
-                questions.forEach((q, i) => { if (answers[i] === q.correct) correct++; });
-                const percentage = Math.round((correct / 20) * 100);
-
-                let feedback = "", circleClass = "";
-                if (percentage >= 90) { feedback = "¡Excelente! Dominas el tema."; circleClass = "excellent"; }
-                else if (percentage >= 75) { feedback = "¡Muy bien! Gran nivel."; circleClass = "good"; }
-                else if (percentage >= 60) { feedback = "Bien, pero puedes mejorar."; circleClass = "regular"; }
-                else { feedback = "¡Ánimo! Hay que repasar más."; circleClass = "low"; }
-
-                content.innerHTML = `
-                    <div class="result">
-                        <h2>¡Cuestionario completado!</h2>
-                        <div class="score-circle ${circleClass}">${correct}<small>/20</small></div>
-                        <h3>${percentage}%</h3>
-                        <p style="font-size:1.3rem; margin:20px 0; color:#555;">${feedback}</p>
-                        <button class="btn-restart">Volver a intentarlo</button>
-                    </div>`;
-
-                content.querySelector('.btn-restart').onclick = () => {
-                    questions = getRandomQuestions();
-                    answers = new Array(20).fill(null);
-                    currentIndex = -1;
-                    renderContent();
-                };
-            }
-        }
-
-        renderContent();
-    </script>
-</body>
-</html>
+        .excellent { background: linear-gradient(135deg, #...
