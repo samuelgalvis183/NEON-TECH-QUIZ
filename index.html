@@ -1,304 +1,412 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-<meta charset="UTF-8">
-<title>CYBERQUIZ 2077 // Samuel Galvis</title>
-<style>
-    @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&display=swap');
-    
-    body {
-        margin: 0;
-        height: 100vh;
-        background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
-        color: #00ffea;
-        font-family: 'Orbitron', sans-serif;
-        overflow: hidden;
-        background-image: 
-            radial-gradient(circle at 10% 20%, rgba(0, 255, 255, 0.3) 0%, transparent 20%),
-            radial-gradient(circle at 90% 80%, rgba(255, 0, 255, 0.3) 0%, transparent 20%);
-    }
-    .glitch {
-        animation: glitch 3s infinite;
-    }
-    @keyframes glitch {
-        0%,100% { text-shadow: 0 0 10px #00ffea; }
-        20% { text-shadow: -5px 0 #ff00ff, 5px 0 #00ffea; }
-        40% { text-shadow: 5px 0 #ff00ff, -5px 0 #00ffea; }
-    }
-    .container {
-        max-width: 900px;
-        margin: 0 auto;
-        padding: 20px;
-        position: relative;
-        z-index: 2;
-    }
-    .header {
-        text-align: center;
-        padding: 40px 0;
-        border: 2px solid #00ffea;
-        border-radius: 15px;
-        background: rgba(0, 0, 0, 0.7);
-        margin-bottom: 30px;
-        box-shadow: 0 0 30px #00ffea;
-    }
-    .btn {
-        background: transparent;
-        border: 2px solid #00ffea;
-        color: #00ffea;
-        padding: 12px 25px;
-        margin: 10px;
-        cursor: pointer;
-        border-radius: 5px;
-        transition: all 0.3s;
-        font-family: 'Orbitron';
-    }
-    .btn:hover {
-        background: #00ffea;
-        color: #000;
-        box-shadow: 0 0 20px #00ffea;
-    }
-    .question-box {
-        background: rgba(0, 0, 0, 0.8);
-        padding: 30px;
-        border-radius: 15px;
-        border: 1px solid #ff00ff;
-        box-shadow: 0 0 25px rgba(255, 0, 255, 0.4);
-        min-height: 400px;
-    }
-    .options button {
-        display: block;
-        width: 100%;
-        margin: 12px 0;
-        padding: 15px;
-        text-align: left;
-        background: rgba(0, 255, 255, 0.1);
-        border: 1px solid #00ffea;
-    }
-    .options button:hover {
-        background: rgba(0, 255, 255, 0.3);
-    }
-    .lifeline {
-        position: fixed;
-        top: 20px;
-        right: 20px;
-        z-index: 100;
-    }
-    .hidden { display: none; }
-    .correct { background: #0f0 !important; color: #000; }
-    .incorrect { background: #f00 !important; color: #fff; }
-</style>
+    <meta charset="UTF-8">
+    <title>CYBERQUIZ 2077 // Samuel Galvis</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&display=swap');
+        
+        body {
+            margin: 0;
+            height: 100vh;
+            background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
+            color: #00ffea;
+            font-family: 'Orbitron', sans-serif;
+            overflow: hidden;
+            background-image: 
+                radial-gradient(circle at 10% 20%, rgba(0, 255, 255, 0.3) 0%, transparent 20%),
+                radial-gradient(circle at 90% 80%, rgba(255, 0, 255, 0.3) 0%, transparent 20%);
+        }
+        .glitch {
+            animation: glitch 3s infinite;
+        }
+        @keyframes glitch {
+            0%,100% { text-shadow: 0 0 10px #00ffea; }
+            20% { text-shadow: -5px 0 #ff00ff, 5px 0 #00ffea; }
+            40% { text-shadow: 5px 0 #ff00ff, -5px 0 #00ffea; }
+        }
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+            position: relative;
+            z-index: 2;
+        }
+        .header {
+            text-align: center;
+            padding: 40px 0;
+            border: 2px solid #00ffea;
+            border-radius: 15px;
+            background: rgba(0, 0, 0, 0.7);
+            margin-bottom: 30px;
+            box-shadow: 0 0 30px #00ffea;
+        }
+        .btn {
+            background: transparent;
+            border: 2px solid #00ffea;
+            color: #00ffea;
+            padding: 12px 25px;
+            margin: 10px;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: all 0.3s;
+            font-family: 'Orbitron';
+        }
+        .btn:hover {
+            background: #00ffea;
+            color: #000;
+            box-shadow: 0 0 20px #00ffea;
+        }
+        .question-box {
+            background: rgba(0, 0, 0, 0.8);
+            padding: 30px;
+            border-radius: 15px;
+            border: 1px solid #ff00ff;
+            box-shadow: 0 0 25px rgba(255, 0, 255, 0.4);
+            min-height: 400px;
+        }
+        .options button {
+            display: block;
+            width: 100%;
+            margin: 12px 0;
+            padding: 15px;
+            text-align: left;
+            background: rgba(0, 255, 255, 0.1);
+            border: 1px solid #00ffea;
+        }
+        .options button:hover {
+            background: rgba(0, 255, 255, 0.3);
+        }
+        .lifeline {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 100;
+        }
+        .hidden { display: none; }
+        .correct { background: #0f0 !important; color: #000; }
+        .incorrect { background: #f00 !important; color: #fff; }
+        .disabled { opacity: 0.5; cursor: not-allowed; }
+    </style>
 </head>
 <body oncontextmenu="return false;">
-<audio id="bgmusic" loop autoplay volume="0.2">
-    <source src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_8c2e2c0c7e.mp3?filename=cyberpunk-2099-121353.mp3" type="audio/mp3">
-</audio>
+    <audio id="bgmusic" loop autoplay volume="0.2">
+        <source src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_8c2e2c0c7e.mp3?filename=cyberpunk-2099-121353.mp3" type="audio/mp3">
+    </audio>
 
-<div class="container">
-    <!-- Pantalla de bienvenida -->
-    <div id="welcome" class="header">
-        <h1 class="glitch">CYBERQUIZ 2077</h1>
-        <h2>Desafío Neural // Nivel: Chrome</h2>
-        <p><strong>Autor:</strong> Samuel Galvis</p>
-        <p><strong>Propósito:</strong> Evaluar tus conocimientos en tecnología, redes, hacking, hardware, historia del ciberespacio y cultura cyberpunk.</p>
-        <p>Temas: Historia de Internet • Ciberseguridad • Hardware legendario • Redes • Protocolos • Crypto • Cultura Hacker • Cyberpunk</p>
-        <br>
-        <button class="btn" onclick="startQuiz()">INICIAR CONEXIÓN</button>
-    </div>
-
-    <!-- Juego -->
-    <div id="game" class="hidden">
-        <div class="lifeline">
-            <p>Tiempo: <span id="timer">00:00</span></p>
-            <p>50/50: <span id="fifty">5</span>/5</p>
-            <p>Intentos totales: <span id="attempts">0</span></p>
-            <button class="btn" onclick="useFifty()">50/50</button>
-            <button class="btn" onclick="giveHint()">Pista [JARVIS]</button>
+    <div class="container">
+        <!-- Pantalla de bienvenida -->
+        <div id="welcome" class="header">
+            <h1 class="glitch">CYBERQUIZ 2077</h1>
+            <h2>Desafío Neural // Nivel: Chrome</h2>
+            <p><strong>Autor:</strong> Samuel Galvis</p>
+            <p><strong>Propósito:</strong> Evaluar tus conocimientos en tecnología, redes, hacking, hardware, historia del ciberespacio y cultura cyberpunk.</p>
+            <p>Temas: Historia de Internet • Ciberseguridad • Hardware legendario • Redes • Protocolos • Crypto • Cultura Hacker • Cyberpunk</p>
+            <br>
+            <button class="btn" onclick="startQuiz()">INICIAR CONEXIÓN</button>
         </div>
 
-        <div style="text-align:center; margin-bottom:20px;">
-            <h2>Pregunta <span id="currentQ">1</span>/20</h2>
-            <div style="width:100%; background:#333; height:10px; border-radius:5px;">
-                <div id="progress" style="width:5%; background:#00ffea; height:100%; border-radius:5px; transition:0.5s;"></div>
+        <!-- Juego -->
+        <div id="game" class="hidden">
+            <div class="lifeline">
+                <p>Tiempo: <span id="timer">00:00</span></p>
+                <p>50/50: <span id="fifty">5</span>/5</p>
+                <p>Intentos totales: <span id="attempts">0</span></p>
+                <button class="btn" onclick="useFifty()" id="fiftyBtn">50/50</button>
+                <button class="btn" onclick="giveHint()" id="hintBtn">Pista [JARVIS]</button>
+            </div>
+
+            <div style="text-align:center; margin-bottom:20px;">
+                <h2>Pregunta <span id="currentQ">1</span>/20</h2>
+                <div style="width:100%; background:#333; height:10px; border-radius:5px;">
+                    <div id="progress" style="width:5%; background:#00ffea; height:100%; border-radius:5px; transition:0.5s;"></div>
+                </div>
+            </div>
+
+            <div class="question-box">
+                <h3 id="question"></h3>
+                <div class="options" id="options"></div>
+                
+                <div style="margin-top:30px; text-align:center;">
+                    <button class="btn" onclick="prevQuestion()" id="prevBtn" disabled>◄ Anterior</button>
+                    <button class="btn" onclick="nextQuestion()" id="nextBtn">Siguiente ►</button>
+                </div>
             </div>
         </div>
 
-        <div class="question-box">
-            <h3 id="question"></h3>
-            <div class="options" id="options"></div>
+        <!-- Final -->
+        <div id="result" class="header hidden">
+            <h1 class="glitch">CONEXIÓN TERMINADA</h1>
+            <h2>Puntuación final: <span id="score">0</span>/20</h2>
+            <p id="feedback"></p>
+            <p>Tiempo empleado: <span id="finalTime">00:00</span></p>
+            <button class="btn" onclick="location.reload()">Volver al Ciberespacio</button>
+        </div>
+    </div>
+
+    <script>
+        // Base de datos completa con 60 preguntas (agregué las faltantes para llegar a 60)
+        const questions = [
+            {q: "¿En qué año se liberó el protocolo TCP/IP que dio origen a Internet tal como lo conocemos?", a: "1983", o: ["1974", "1983", "1991", "1969"], hint: "Es el año en que ARPANET adoptó oficialmente TCP/IP."},
+            {q: "¿Quién escribió el Manifiesto Cypherpunk en 1993?", a: "Eric Hughes", o: ["John Perry Barlow", "Timothy C. May", "Eric Hughes", "Julian Assange"], hint: "No es ni Barlow ni May..."},
+            {q: "¿Qué microprocesador usaba la legendaria Commodore 64?", a: "MOS 6510", o: ["Zilog Z80", "Intel 8088", "MOS 6510", "Motorola 68000"], hint: "Es un derivado del 6502."},
+            {q: "¿Cuál fue el primer virus informático de la historia (1986)?", a: "Brain", o: ["ILOVEYOU", "Morris", "Brain", "Code Red"], hint: "Creado por dos hermanos paquistaníes."},
+            {q: "¿Qué significa 'GNU' en GNU/Linux?", a: "GNU's Not Unix", o: ["Great New Utility", "GNU's Not Unix", "General Network Utility", "Gnu New Unix"], hint: "Es un acrónimo recursivo."},
+            {q: "¿Qué puerto usa por defecto SSH?", a: "22", o: ["21", "22", "80", "443"], hint: "No es el de HTTP ni HTTPS."},
+            {q: "¿Qué hacker famoso liberó el código de Inter@ctivo en la TV española?", a: "Kevin Mitnick", o: ["Kevin Mitnick", "Adrian Lamo", "Albert González", "Phreak"], hint: "Secuestró una emisión en directo."},
+            {q: "¿En qué año nació Bitcoin?", a: "2009", o: ["2008", "2009", "2010", "2007"], hint: "El whitepaper es de 2008, pero el bloque génesis es de..."},
+            {q: "¿Qué empresa creó el primer ratón comercial con bola mecánica?", a: "Xerox", o: ["Apple", "Microsoft", "Xerox", "IBM"], hint: "Fue en el Xerox Alto."},
+            {q: "¿Qué protocolo usaba Napster originalmente?", a: "Propio (no P2P puro)", o: ["BitTorrent", "Gnutella", "eDonkey", "Propio (no P2P puro)"], hint: "Tenía servidores centrales."},
+            {q: "¿Qué significan las siglas 'BBS'?", a: "Bulletin Board System", o: ["Binary Board System", "Bulletin Board System", "Basic Backup Service", "Broadband Service"], hint: "Eran los foros antes de Internet."},
+            {q: "¿Quién escribió 'Neuromante' (1984), novela que acuñó 'ciberespacio'?", a: "William Gibson", o: ["Philip K. Dick", "Bruce Sterling", "William Gibson", "Neal Stephenson"], hint: "Es el padre del cyberpunk."},
+            {q: "¿Qué chip usó la PlayStation 1?", a: "R3000A", o: ["PowerPC", "R3000A", "x86", "SH-4"], hint: "Es un MIPS."},
+            {q: "¿Qué ataque usó Stuxnet?", a: "Zero-day en Windows + PLC Siemens", o: ["SQL Injection", "Zero-day en Windows + PLC Siemens", "DDoS", "Phishing"], hint: "Destruyó centrifugadoras físicas."},
+            {q: "¿Qué lenguaje creó Guido van Rossum en 1991?", a: "Python", o: ["Ruby", "Java", "Python", "Perl"], hint: "Tiene una serpiente como logo."},
+            {q: "¿Qué significa '404' en HTTP?", a: "Not Found", o: ["Forbidden", "Not Found", "OK", "Unauthorized"], hint: "La página no existe."},
+            {q: "¿Qué proyecto de Torvalds empezó como hobby en 1991?", a: "Linux", o: ["Git", "Linux", "GNU", "HURD"], hint: "Soy Linus, y esto es un kernel..."},
+            {q: "¿Qué empresa lanzó el primer smartphone comercial (1994)?", a: "IBM", o: ["Nokia", "IBM", "Motorola", "Apple"], hint: "Se llamaba Simon."},
+            {q: "¿Qué hacker lanzó LOIC, herramienta famosa de Anonymous?", a: "Praetox", o: ["Sabu", "Topiary", "Praetox", "LulzSec"], hint: "Es una herramienta de DDoS simple."},
+            {q: "¿En qué año se fundó la Electronic Frontier Foundation (EFF)?", a: "1990", o: ["1985", "1990", "1995", "2000"], hint: "Después del caso Steve Jackson Games."},
+            // Preguntas adicionales para llegar a 60
+            {q: "¿Qué es un 'rootkit'?", a: "Software que oculta procesos maliciosos", o: ["Un tipo de firewall", "Software que oculta procesos maliciosos", "Un lenguaje de programación", "Un protocolo de encriptación"], hint: "Se esconde en el núcleo del sistema."},
+            {q: "¿Cuál es el puerto por defecto de HTTP?", a: "80", o: ["22", "443", "80", "21"], hint: "El de las páginas web sin HTTPS."},
+            {q: "¿Quién inventó el WWW en 1989?", a: "Tim Berners-Lee", o: ["Vint Cerf", "Tim Berners-Lee", "Alan Turing", "Bill Gates"], hint: "Trabajaba en el CERN."},
+            {q: "¿Qué significa DDoS?", a: "Distributed Denial of Service", o: ["Dynamic Data Storage", "Distributed Denial of Service", "Digital Document System", "Direct Download Service"], hint: "Es un ataque de inundación masiva."},
+            {q: "¿Qué CPU usaba el IBM PC original?", a: "Intel 8088", o: ["Intel 8086", "Intel 8088", "Zilog Z80", "Motorola 68000"], hint: "Tenía bus de 8 bits."},
+            {q: "¿En qué año se lanzó el primer iPhone?", a: "2007", o: ["2005", "2007", "2009", "2010"], hint: "Revolucionó los smartphones."},
+            {q: "¿Qué es 'zero-day'?", a: "Exploit antes de que exista parche", o: ["Día cero de un proyecto", "Exploit antes de que exista parche", "Un tipo de virus", "Protocolo de seguridad"], hint: "El vendor no lo sabe aún."},
+            {q: "¿Qué lenguaje usa el kernel de Linux?", a: "C", o: ["Python", "Java", "C", "Assembly"], hint: "Bajo nivel para eficiencia."},
+            {q: "¿Qué es SQL Injection?", a: "Ataque inyectando código SQL malicioso", o: ["Inyección de velocidad", "Ataque inyectando código SQL malicioso", "Error de compilación", "Tipo de encriptación"], hint: "Afecta bases de datos."},
+            {q: "¿Quién creó el primer worm en Internet (1988)?", a: "Robert Tappan Morris", o: ["Kevin Mitnick", "Robert Tappan Morris", "Gary McKinnon", "Adrian Lamo"], hint: "Fue un experimento que salió mal."},
+            {q: "¿Qué es 'phishing'?", a: "Engaño para robar credenciales", o: ["Pesca digital", "Engaño para robar credenciales", "Protocolo de red", "Tipo de hardware"], hint: "Imita sitios legítimos."},
+            {q: "¿Qué significa API?", a: "Application Programming Interface", o: ["Advanced Processing Input", "Application Programming Interface", "Automated Payment Integration", "Audio Processing Interface"], hint: "Permite que apps hablen entre sí."},
+            {q: "¿En qué año se creó el primer dominio .com?", a: "1985", o: ["1980", "1985", "1990", "1975"], hint: "Symbolics.com fue el primero."},
+            {q: "¿Qué es un 'firewall'?", a: "Barrera de seguridad en redes", o: ["Software de impresión", "Barrera de seguridad en redes", "Herramienta de desarrollo", "Tipo de virus"], hint: "Bloquea tráfico no autorizado."},
+            {q: "¿Qué lenguaje inventó Bjarne Stroustrup?", a: "C++", o: ["C#", "Java", "C++", "Go"], hint: "Extensión de C con objetos."},
+            {q: "¿Qué es 'blockchain'?", a: "Cadena de bloques inmutable para transacciones", o: ["Almacenamiento en bloque", "Cadena de bloques inmutable para transacciones", "Tipo de red", "Lenguaje de programación"], hint: "Base de Bitcoin."},
+            {q: "¿Qué puerto usa HTTPS?", a: "443", o: ["80", "22", "443", "25"], hint: "HTTP seguro."},
+            {q: "¿Quién es el creador de Ethereum?", a: "Vitalik Buterin", o: ["Satoshi Nakamoto", "Vitalik Buterin", "Charles Hoskinson", "Gavin Wood"], hint: "Es ruso-canadiense."},
+            {q: "¿Qué es 'ransomware'?", a: "Malware que cifra archivos y pide rescate", o: ["Software de respaldo", "Malware que cifra archivos y pide rescate", "Herramienta de edición", "Protocolo de chat"], hint: "WannaCry es famoso."},
+            {q: "¿En qué año se lanzó Windows 95?", a: "1995", o: ["1990", "1995", "2000", "1985"], hint: "Introdujo el menú Start."},
+            {q: "¿Qué es 'VPN'?", a: "Virtual Private Network", o: ["Very Powerful Node", "Virtual Private Network", "Video Processing Network", "Voice Protocol Network"], hint: "Túnel encriptado."},
+            {q: "¿Qué CPU usa la mayoría de Macs modernos?", a: "Apple M-series", o: ["Intel Core", "AMD Ryzen", "Apple M-series", "Qualcomm Snapdragon"], hint: "ARM-based."},
+            {q: "¿Qué es 'IoT'?", a: "Internet of Things", o: ["Input Output Terminal", "Internet of Things", "Integrated Operating Tool", "International Organization Tech"], hint: "Dispositivos conectados."},
+            {q: "¿En qué año se creó el primer email?", a: "1971", o: ["1969", "1971", "1980", "1965"], hint: "Por Ray Tomlinson."},
+            {q: "¿Qué es 'AI'?", a: "Artificial Intelligence", o: ["Advanced Interface", "Artificial Intelligence", "Audio Integration", "Automated Installation"], hint: "Inteligencia simulada."},
+            {q: "¿Qué lenguaje es interpretado y usa Zen de Python?", a: "Python", o: ["JavaScript", "Ruby", "Python", "PHP"], hint: "Batteries included."},
+            {q: "¿Qué es 'cloud computing'?", a: "Servicios computacionales en la nube", o: ["Almacenamiento en disco", "Servicios computacionales en la nube", "Red local", "Hardware físico"], hint: "AWS, Azure."},
+            {q: "¿En qué año se fundó Google?", a: "1998", o: ["1995", "1998", "2000", "1990"], hint: "Por Larry y Sergey."},
+            {q: "¿Qué es '5G'?", a: "Quinta generación de redes móviles", o: ["Quinto procesador gráfico", "Quinta generación de redes móviles", "Software de edición", "Tipo de encriptación"], hint: "Velocidades ultra altas."},
+            {q: "¿Qué significa HTML?", a: "HyperText Markup Language", o: ["High Tech Media Language", "HyperText Markup Language", "Home Tool Management Language", "Hyper Transfer Markup Language"], hint: "Estructura web."},
+            {q: "¿Qué es 'quantum computing'?", a: "Computación basada en qubits y superposición", o: ["Computación rápida", "Computación basada en qubits y superposición", "Red cuántica", "Algoritmo cuántico solo"], hint: "IBM y Google lideran."},
+            {q: "¿En qué año se lanzó el primer Tesla Roadster?", a: "2008", o: ["2005", "2008", "2010", "2000"], hint: "Elon Musk's first car."},
+            {q: "¿Qué es 'NFT'?", a: "Non-Fungible Token", o: ["New File Type", "Non-Fungible Token", "Network File Transfer", "Natural File Type"], hint: "Arte digital único."},
+            {q: "¿Qué puerto usa SMTP?", a: "25", o: ["110", "25", "993", "143"], hint: "Para enviar emails."},
+            {q: "¿Quién creó el algoritmo RSA?", a: "Rivest, Shamir y Adleman", o: ["Diffie y Hellman", "Rivest, Shamir y Adleman", "Berners-Lee", "Torvalds"], hint: "Criptografía asimétrica."},
+            {q: "¿Qué es 'machine learning'?", a: "Subcampo de IA donde modelos aprenden de datos", o: ["Aprendizaje manual", "Subcampo de IA donde modelos aprenden de datos", "Redes neuronales solo", "Algoritmos fijos"], hint: "Parte de la IA."},
+            {q: "¿En qué año se creó el primer navegador web?", a: "1990", o: ["1985", "1990", "1995", "2000"], hint: "WorldWideWeb por Tim."},
+            {q: "¿Qué es 'BIOS'?", a: "Basic Input/Output System", o: ["Binary Input System", "Basic Input/Output System", "Boot Initialization OS", "Base Internet OS"], hint: "Firmware de arranque."},
+            {q: "¿Qué lenguaje usa Android nativamente?", a: "Kotlin (o Java)", o: ["Swift", "Kotlin (o Java)", "C#", "Python"], hint: "JVM-based."},
+            {q: "¿Qué es 'metaverso'?", a: "Mundo virtual persistente e inmersivo", o: ["Meta verso literario", "Mundo virtual persistente e inmersivo", "Red social", "Juego VR solo"], hint: "Facebook lo impulsa."},
+            {q: "¿En qué año se lanzó ChatGPT?", a: "2022", o: ["2020", "2022", "2023", "2021"], hint: "De OpenAI."},
+            {q: "¿Qué es 'edge computing'?", a: "Procesamiento cerca de la fuente de datos", o: ["Borde de red", "Procesamiento cerca de la fuente de datos", "Cloud edge", "Hardware edge"], hint: "Reduce latencia."},
+            {q: "¿Qué significa CSS?", a: "Cascading Style Sheets", o: ["Computer Style System", "Cascading Style Sheets", "Code Sharing Service", "Central Style Server"], hint: "Estilos para HTML."}
+        ];
+
+        let selectedQuestions = [];
+        let currentQuestion = 0;
+        let answers = new Array(20).fill(null);
+        let fiftyUsed = 0;
+        const maxFifty = 5;
+        let startTime;
+        let timerInterval;
+        let attempts = parseInt(localStorage.getItem('cyberquiz_attempts')) || 0;
+        let fiftyHidden = {}; // Para rastrear opciones ocultas por 50/50
+
+        function startQuiz() {
+            attempts++;
+            localStorage.setItem('cyberquiz_attempts', attempts);
+            document.getElementById('attempts').innerText = attempts;
             
-            <div style="margin-top:30px; text-align:center;">
-                <button class="btn" onclick="prevQuestion()" id="prevBtn">◄ Anterior</button>
-                <button class="btn" onclick="nextQuestion()" id="nextBtn">Siguiente ►</button>
-            </div>
-        </div>
-    </div>
-
-    <!-- Final -->
-    <div id="result" class="header hidden">
-        <h1 class="glitch">CONEXIÓN TERMINADA</h1>
-        <h2>Puntuación final: <span id="score">0</span>/20</h2>
-        <p id="feedback"></p>
-        <p>Tiempo empleado: <span id="finalTime">00:00</span></p>
-        <button class="btn" onclick="location.reload()">Volver al Ciberespacio</button>
-    </div>
-</div>
-
-<script>
-// Base de datos con 60 preguntas cyberpunk/tech
-const questions = [
-    {q: "¿En qué año se liberó el protocolo TCP/IP que dio origen a Internet tal como lo conocemos?", a: "1983", o: ["1974", "1983", "1991", "1969"], hint: "Es el año en que ARPANET adoptó oficialmente TCP/IP."},
-    {q: "¿Quién escribió el Manifiesto Cypherpunk en 1993?", a: "Eric Hughes", o: ["John Perry Barlow", "Timothy C. May", "Eric Hughes", "Julian Assange"], hint: "No es ni Barlow ni May..."},
-    {q: "¿Qué microprocesador usaba la legendaria Commodore 64?", a: "MOS 6510", o: ["Zilog Z80", "Intel 8088", "MOS 6510", "Motorola 68000"], hint: "Es un derivado del 6502."},
-    {q: "¿Cuál fue el primer virus informático de la historia (1986)?", a: "Brain", o: ["ILOVEYOU", "Morris", "Brain", "Code Red"], hint: "Creado por dos hermanos paquistaníes."},
-    {q: "¿Qué significa 'GNU' en GNU/Linux?", a: "GNU's Not Unix", o: ["Great New Utility", "GNU's Not Unix", "General Network Utility", "Gnu New Unix"], hint: "Es un acrónimo recursivo."},
-    {q: "¿Qué puerto usa por defecto SSH?", a: "22", o: ["21", "22", "80", "443"], hint: "No es el de HTTP ni HTTPS."},
-    {q: "¿Qué hacker famoso liberó el código de Inter@ctivo en la TV española?", a: "Kevin Mitnick", o: ["Kevin Mitnick", "Adrian Lamo", "Albert González", "Phreak"], hint: "Secuestró una emisión en directo."},
-    {q: "¿En qué año nació Bitcoin?", a: "2009", o: ["2008", "2009", "2010", "2007"], hint: "El whitepaper es de 2008, pero el bloque génesis es de..."},
-    {q: "¿Qué empresa creó el primer ratón comercial con bola mecánica?", a: "Xerox", o: ["Apple", "Microsoft", "Xerox", "IBM"], hint: "Fue en el Xerox Alto."},
-    {q: "¿Qué protocolo usaba Napster originalmente?", a: "Propio (no P2P puro)", o: ["BitTorrent", "Gnutella", "eDonkey", "Propio (no P2P puro)"], hint: "Tenía servidores centrales."},
-    // ... (continúa hasta 60, aquí solo pongo 20 por espacio, pero el código completo tiene las 60)
-    {q: "¿Qué significan las siglas 'BBS'?", a: "Bulletin Board System", o: ["Binary Board System", "Bulletin Board System", "Basic Backup Service", "Broadband Service"], hint: "Eran los foros antes de Internet."},
-    {q: "¿Quién escribió 'Neuromante' (1984), novela que acuñó 'ciberespacio'?", a: "William Gibson", o: ["Philip K. Dick", "Bruce Sterling", "William Gibson", "Neal Stephenson"], hint: "Es el padre del cyberpunk."},
-    {q: "¿Qué chip usó la PlayStation 1?", a: "R3000A", o: ["PowerPC", "R3000A", "x86", "SH-4"], hint: "Es un MIPS."},
-    {q: "¿Qué ataque usó Stuxnet?", a: "Zero-day en Windows + PLC Siemens", o: ["SQL Injection", "Zero-day en Windows + PLC Siemens", "DDoS", "Phishing"], hint: "Destruyó centrifugadoras físicas."},
-    {q: "¿Qué lenguaje creó Guido van Rossum en 1991?", a: "Python", o: ["Ruby", "Java", "Python", "Perl"], hint: "Tiene una serpiente como logo."},
-    {q: "¿Qué significa '404' en HTTP?", a: "Not Found", o: ["Forbidden", "Not Found", "OK", "Unauthorized"], hint: "La página no existe."},
-    {q: "¿Qué proyecto de Torvalds empezó como hobby en 1991?", a: "Linux", o: ["Git", "Linux", "GNU", "HURD"], hint: "Soy Linus, y esto es un kernel..."},
-    {q: "¿Qué empresa lanzó el primer smartphone comercial (1994)?", a: "IBM", o: ["Nokia", "IBM", "Motorola", "Apple"], hint: "Se llamaba Simon."},
-    {q: "¿Qué hacker lanzó LOIC, herramienta famosa de Anonymous?", a: "Praetox", o: ["Sabu", "Topiary", "Praetox", "LulzSec"], hint: "Es una herramienta de DDoS simple."},
-    {q: "¿En qué año se fundó la Electronic Frontier Foundation (EFF)?", a: "1990", o: ["1985", "1990", "1995", "2000"], hint: "Después del caso Steve Jackson Games."}
-    // Aquí irían las otras 40 preguntas reales, pero por espacio solo dejo 20. El código final tiene las 60.
-];
-
-// Añade más preguntas hasta llegar a 60 si quieres la versión completa (puedes pedírmelo)
-
-let selectedQuestions = [];
-let currentQuestion = 0;
-let answers = new Array(20).fill(null);
-let fiftyUsed = 0;
-const maxFifty = 5;
-let startTime;
-let timerInterval;
-let attempts = localStorage.getItem('cyberquiz_attempts') || 0;
-
-function startQuiz() {
-    attempts++;
-    localStorage.setItem('cyberquiz_attempts', attempts);
-    document.getElementById('attempts'). <h2>innerText = attempts;
-    
-    selectedQuestions = questions.sort(() => 0.5 - Math.random()).slice(0, 20);
-    document.getElementById('welcome').classList.add('hidden');
-    document.getElementById('game').classList.remove('hidden');
-    
-    startTime = Date.now();
-    timerInterval = setInterval(updateTimer, 1000);
-    
-    showQuestion(0);
-}
-
-function updateTimer() {
-    let elapsed = Math.floor((Date.now() - startTime) / 1000);
-    let m = String(Math.floor(elapsed / 60)).padStart(2, '0');
-    let s = String(elapsed % 60).padStart(2, '0');
-    document.getElementById('timer').innerText = `${m}:${s}`;
-}
-
-function showQuestion(n) {
-    currentQuestion = n;
-    document.getElementById('currentQ').innerText = n + 1;
-    document.getElementById('progress').style.width = `${((n + 1)/20)*100}%`;
-    
-    document.getElementById('prevBtn').disabled = n === 0;
-    document.getElementById('nextBtn').innerText = n === 19 ? 'FINALIZAR' : 'Siguiente ►';
-    
-    let q = selectedQuestions[n];
-    document.getElementById('question').innerHTML = `<strong>${n+1}.</strong> ${q.q}`;
-    
-    let opts = document.getElementById('options');
-    opts.innerHTML = '';
-    q.o.forEach((opt, i) => {
-        let btn = document.createElement('button');
-        btn.innerText = opt;
-        btn.onclick = () => selectAnswer(n, opt, btn);
-        if (answers[n] === opt) {
-            btn.className = opt === q.a ? 'correct' : 'incorrect';
+            selectedQuestions = questions.sort(() => 0.5 - Math.random()).slice(0, 20);
+            fiftyHidden = {}; // Reset
+            answers = new Array(20).fill(null);
+            fiftyUsed = 0;
+            document.getElementById('fifty').innerText = maxFifty;
+            document.getElementById('fiftyBtn').classList.remove('disabled');
+            
+            document.getElementById('welcome').classList.add('hidden');
+            document.getElementById('game').classList.remove('hidden');
+            
+            startTime = Date.now();
+            timerInterval = setInterval(updateTimer, 1000);
+            
+            showQuestion(0);
         }
-        opts.appendChild(btn);
-    });
-}
 
-function selectAnswer(n, answer, btn) {
-    answers[n] = answer;
-    let buttons = document.querySelectorAll('#options button');
-    buttons.forEach(b => {
-        if (b.innerText === selectedQuestions[n].a) b.classList.add('correct');
-        else if (b.innerText === answer && answer !== selectedQuestions[n].a) b.classList.add('incorrect');
-        b.disabled = true;
-    });
-}
+        function updateTimer() {
+            let elapsed = Math.floor((Date.now() - startTime) / 1000);
+            let m = String(Math.floor(elapsed / 60)).padStart(2, '0');
+            let s = String(elapsed % 60).padStart(2, '0');
+            document.getElementById('timer').innerText = `${m}:${s}`;
+        }
 
-function nextQuestion() {
-    if (currentQuestion < 19) {
-        showQuestion(currentQuestion + 1);
-    } else {
-        finishQuiz();
-    }
-}
+        function showQuestion(n) {
+            currentQuestion = n;
+            document.getElementById('currentQ').innerText = n + 1;
+            document.getElementById('progress').style.width = `${((n + 1)/20)*100}%`;
+            
+            let prevBtn = document.getElementById('prevBtn');
+            prevBtn.disabled = n === 0;
+            prevBtn.classList.toggle('disabled', n === 0);
+            
+            let nextBtn = document.getElementById('nextBtn');
+            nextBtn.innerText = n === 19 ? 'FINALIZAR' : 'Siguiente ►';
+            
+            let q = selectedQuestions[n];
+            document.getElementById('question').innerHTML = `<strong>${n+1}.</strong> ${q.q}`;
+            
+            let opts = document.getElementById('options');
+            opts.innerHTML = '';
+            q.o.forEach((opt, i) => {
+                let btn = document.createElement('button');
+                btn.innerText = opt;
+                btn.onclick = () => selectAnswer(n, opt, btn);
+                if (answers[n] === opt) {
+                    btn.classList.add(opt === q.a ? 'correct' : 'incorrect');
+                }
+                // Ocultar si fue hidden por 50/50
+                if (fiftyHidden[n] && fiftyHidden[n].includes(opt)) {
+                    btn.style.display = 'none';
+                }
+                opts.appendChild(btn);
+            });
+            
+            // Actualizar 50/50 restante
+            document.getElementById('fifty').innerText = maxFifty - fiftyUsed;
+        }
 
-function prevQuestion() {
-    if (currentQuestion > 0) showQuestion(currentQuestion - 1);
-}
+        function selectAnswer(n, answer, btn) {
+            if (answers[n] !== null) return; // Ya respondida
+            answers[n] = answer;
+            
+            let q = selectedQuestions[n];
+            let buttons = document.querySelectorAll('#options button:not([style*="display: none"])');
+            buttons.forEach(b => {
+                let text = b.innerText;
+                if (text === q.a) {
+                    b.classList.add('correct');
+                } else if (text === answer && answer !== q.a) {
+                    b.classList.add('incorrect');
+                }
+                b.disabled = true;
+                b.onclick = null;
+            });
+            
+            // Habilitar siguiente si es la última o responder todas
+            if (n < 19 || answers.every(a => a !== null)) {
+                document.getElementById('nextBtn').disabled = false;
+            }
+        }
 
-function giveHint() {
-    let hint = selectedQuestions[currentQuestion].hint;
-    speak(`Pista, jefe: ${hint}`);
-    alert('JARVIS: ' + hint);
-}
+        function nextQuestion() {
+            if (answers[currentQuestion] === null && currentQuestion < 19) {
+                alert('Responde esta pregunta antes de continuar, choom.');
+                return;
+            }
+            if (currentQuestion < 19) {
+                showQuestion(currentQuestion + 1);
+            } else {
+                finishQuiz();
+            }
+        }
 
-function useFifty() {
-    if (fiftyUsed >= maxFifty) return alert('No te quedan 50/50');
-    fiftyUsed++;
-    document.getElementById('fifty').innerText = maxFifty - fiftyUsed;
-    
-    let wrong = selectedQuestions[currentQuestion].o.filter(x => x !== selectedQuestions[currentQuestion].a);
-    wrong = wrong.sort(() => 0.5 - Math.random()).slice(0, 2); // deja 2 incorrectas
-    let toRemove = wrong[0];
-    
-    document.querySelectorAll('#options button').forEach(btn => {
-        if (btn.innerText === toRemove) btn.style.display = 'none';
-    });
-    
-    speak("He eliminado una opción incorrecta, señor.");
-}
+        function prevQuestion() {
+            if (currentQuestion > 0) {
+                showQuestion(currentQuestion - 1);
+            }
+        }
 
-function finishQuiz() {
-    clearInterval(timerInterval);
-    let correct = answers.filter((a, i) => a === selectedQuestions[i].a).length;
-    let time = document.getElementById('timer').innerText;
-    
-    document.getElementById('game').classList.add('hidden');
-    document.getElementById('result').classList.remove('hidden');
-    document.getElementById('score').innerText = correct;
-    document.getElementById('finalTime').innerText = time;
-    
-    let feedback = '';
-    if (correct >= 18) feedback = "CROMADO TOTAL. Eres una leyenda del Net.";
-    else if (correct >= 15) feedback = "Ciber-ninja de élite. Respeto.";
-    else if (correct >= 10) feedback = "Tienes potencial, runner. Sigue jodiendo el sistema.";
-    else feedback = "Vuelve al subsuelo, novato. Aún te falta mucho código.";
-    
-    document.getElementById('feedback').innerText = feedback;
-}
+        function giveHint() {
+            let hint = selectedQuestions[currentQuestion].hint;
+            if ('speechSynthesis' in window) {
+                let utterance = new SpeechSynthesisUtterance(`Pista, jefe: ${hint}`);
+                utterance.lang = 'es-ES';
+                utterance.rate = 0.9;
+                speechSynthesis.speak(utterance);
+            }
+            alert(`JARVIS: ${hint}`);
+        }
 
-function speak(text) {
-    if ('speechSynthesis' in window) {
-        let utterance = new SpeechSynthesisVoice();
-        utterance.text = text;
-        utterance.lang = 'es-ES';
-        utterance.rate = 0.9;
-        speechSynthesis.speak(utterance);
-    }
-}
-</script>
+        function useFifty() {
+            if (fiftyUsed >= maxFifty) {
+                alert('No te quedan usos de 50/50, runner.');
+                return;
+            }
+            if (fiftyHidden[currentQuestion]) {
+                alert('Ya usaste 50/50 en esta pregunta.');
+                return;
+            }
+            
+            let q = selectedQuestions[currentQuestion];
+            let wrongs = q.o.filter(x => x !== q.a);
+            let toHide = wrongs[Math.floor(Math.random() * wrongs.length)];
+            fiftyHidden[currentQuestion] = fiftyHidden[currentQuestion] || [];
+            fiftyHidden[currentQuestion].push(toHide);
+            
+            fiftyUsed++;
+            document.getElementById('fifty').innerText = maxFifty - fiftyUsed;
+            if (fiftyUsed >= maxFifty) {
+                document.getElementById('fiftyBtn').classList.add('disabled');
+            }
+            
+            // Ocultar la opción
+            let buttons = document.querySelectorAll('#options button');
+            buttons.forEach(btn => {
+                if (btn.innerText === toHide) {
+                    btn.style.display = 'none';
+                }
+            });
+            
+            if ('speechSynthesis' in window) {
+                speechSynthesis.speak(new SpeechSynthesisUtterance('Opción incorrecta eliminada. Buena suerte.'));
+            }
+            alert('JARVIS: Una opción incorrecta ha sido eliminada.');
+            
+            // Re-deshabilitar botones si estaban
+            buttons.forEach(b => {
+                if (b.style.display !== 'none') {
+                    b.disabled = answers[currentQuestion] !== null;
+                }
+            });
+        }
+
+        function finishQuiz() {
+            if (!answers.every(a => a !== null)) {
+                alert('Debes responder todas las preguntas para finalizar.');
+                return;
+            }
+            clearInterval(timerInterval);
+            let correct = answers.reduce((count, ans, i) => count + (ans === selectedQuestions[i].a ? 1 : 0), 0);
+            let time = document.getElementById('timer').innerText;
+            
+            document.getElementById('game').classList.add('hidden');
+            document.getElementById('result').classList.remove('hidden');
+            document.getElementById('score').innerText = correct;
+            document.getElementById('finalTime').innerText = time;
+            
+            let feedback = '';
+            if (correct >= 18) feedback = "CROMADO TOTAL. Eres una leyenda del Net. ¡Jackpot!";
+            else if (correct >= 15) feedback = "Ciber-ninja de élite. Respeto total, choom.";
+            else if (correct >= 10) feedback = "Tienes potencial, runner. Sigue jodiendo el sistema.";
+            else if (correct >= 5) feedback = "Novato en el subsuelo. Aprende y regresa más fuerte.";
+            else feedback = "Desconexión total. Vuelve al tutorial, flatline.";
+            
+            document.getElementById('feedback').innerText = feedback;
+        }
+
+        // Inicializar intentos
+        document.getElementById('attempts').innerText = attempts;
+    </script>
 </body>
 </html>
