@@ -11,19 +11,18 @@
             --cyan: #00ffff;
             --magenta: #ff00ff;
             --dark: #0d001a;
-            --darker: #05000f;
-            --panel: rgba(10, 0, 40, 0.7);
+            --panel: rgba(10, 0, 40, 0.85);
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
-            background: var(--darker);
+            background: var(--dark);
             background-image: 
-                linear-gradient(45deg, rgba(255,0,255,0.03) 25%, transparent 25%),
-                linear-gradient(-45deg, rgba(255,0,255,0.03) 25%, transparent 25%),
-                linear-gradient(45deg, transparent 75%, rgba(0,255,255,0.03) 75%),
-                linear-gradient(-45deg, transparent 75%, rgba(0,255,255,0.03) 75%);
-            background-size: 20px 20px;
+                linear-gradient(45deg, rgba(255,0,255,0.04) 25%, transparent 25%),
+                linear-gradient(-45deg, rgba(255,0,255,0.04) 25%, transparent 25%),
+                linear-gradient(45deg, transparent 75%, rgba(0,255,255,0.04) 75%),
+                linear-gradient(-45deg, transparent 75%, rgba(0,255,255,0.04) 75%);
+            background-size: 30px 30px;
             color: var(--cyan);
             font-family: 'Share Tech Mono', monospace;
             min-height: 100vh;
@@ -34,144 +33,147 @@
             max-width: 1000px;
             margin: 0 auto;
             background: var(--panel);
-            border: 2px solid var(--cyan);
-            border-radius: 15px;
-            box-shadow: 0 0 40px rgba(0, 255, 255, 0.4);
+            border: 3px solid var(--cyan);
+            border-radius: 20px;
+            box-shadow: 0 0 50px rgba(0, 255, 255, 0.5);
             overflow: hidden;
             position: relative;
         }
 
         .header {
-            background: linear-gradient(90deg, transparent, rgba(255,0,255,0.2), transparent);
-            padding: 25px;
+            background: linear-gradient(90deg, transparent, rgba(255,0,255,0.3), transparent);
+            padding: 30px;
             text-align: center;
-            border-bottom: 2px solid var(--magenta);
+            border-bottom: 3px solid var(--magenta);
         }
 
         .header h1 {
             font-family: 'Orbitron', sans-serif;
-            font-size: 3rem;
+            font-size: 3.5rem;
             font-weight: 900;
             background: linear-gradient(90deg, var(--cyan), var(--magenta));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            text-shadow: 0 0 30px var(--cyan);
+            text-shadow: 0 0 40px var(--cyan);
         }
 
         .stats {
             position: absolute;
-            top: 20px;
-            right: 25px;
+            top: 25px;
+            right: 30px;
             font-family: 'Orbitron';
             font-size: 1.8rem;
             color: var(--magenta);
-            text-shadow: 0 0 20px var(--magenta);
+            text-shadow: 0 0 25px var(--magenta);
+        }
+
+        .author {
+            position: absolute;
+            bottom: 15px;
+            left: 30px;
+            color: var(--magenta);
+            font-size: 1.2rem;
+            text-shadow: 0 0 15px var(--magenta);
         }
 
         .content {
-            padding: 50px;
+            padding: 60px 40px;
         }
 
         .question-counter {
             text-align: center;
-            font-size: 1.6rem;
+            font-size: 2rem;
             margin-bottom: 40px;
             color: var(--cyan);
-            text-shadow: 0 0 15px var(--cyan);
+            text-shadow: 0 0 20px var(--cyan);
         }
 
         .question {
             font-family: 'Orbitron';
-            font-size: 2.2rem;
+            font-size: 2.4rem;
             text-align: center;
-            margin-bottom: 50px;
+            margin-bottom: 60px;
             color: var(--cyan);
-            text-shadow: 0 0 25px var(--cyan);
+            text-shadow: 0 0 30px var(--cyan);
             line-height: 1.4;
         }
 
         .options {
             display: flex;
             flex-direction: column;
-            gap: 20px;
-            max-width: 800px;
+            gap: 25px;
+            max-width: 900px;
             margin: 0 auto;
         }
 
         .option {
-            background: rgba(0, 255, 255, 0.05);
-            border: 2px solid var(--cyan);
-            border-radius: 12px;
-            padding: 25px 30px;
-            font-size: 1.5rem;
+            background: rgba(0, 255, 255, 0.08);
+            border: 3px solid var(--cyan);
+            border-radius: 15px;
+            padding: 30px;
+            font-size: 1.7rem;
             cursor: pointer;
-            transition: all 0.4s;
-            text-align: left;
-            backdrop-filter: blur(5px);
+            transition: all 0.4s ease;
+            text-align: center;
         }
 
         .option:hover {
-            background: rgba(0, 255, 255, 0.15);
+            background: rgba(0, 255, 255, 0.2);
             border-color: var(--magenta);
-            transform: translateY(-5px);
-            box-shadow: 0 10px 30px rgba(255, 0, 255, 0.3);
+            transform: translateY(-8px);
+            box-shadow: 0 15px 40px rgba(255, 0, 255, 0.4);
         }
 
         .option.selected {
-            background: linear-gradient(90deg, rgba(255,0,255,0.4), rgba(0,255,255,0.4));
+            background: linear-gradient(90deg, rgba(255,0,255,0.5), rgba(0,255,255,0.5));
             border-color: var(--magenta);
             color: white;
             font-weight: bold;
-            box-shadow: 0 0 40px rgba(255, 0, 255, 0.6);
+            box-shadow: 0 0 50px rgba(255, 0, 255, 0.7);
         }
 
         .navigation {
             display: flex;
             justify-content: center;
-            gap: 30px;
-            margin-top: 60px;
+            gap: 40px;
+            margin-top: 70px;
         }
 
         button {
             background: transparent;
-            border: 3px solid var(--cyan);
+            border: 4px solid var(--cyan);
             color: var(--cyan);
-            padding: 16px 50px;
+            padding: 18px 60px;
             font-family: 'Orbitron';
-            font-size: 1.6rem;
-            border-radius: 10px;
+            font-size: 1.8rem;
+            border-radius: 12px;
             cursor: pointer;
             transition: all 0.4s;
-            text-shadow: 0 0 15px var(--cyan);
+            text-shadow: 0 0 20px var(--cyan);
         }
 
         button:hover {
             background: var(--cyan);
             color: black;
-            box-shadow: 0 0 40px var(--cyan);
+            box-shadow: 0 0 50px var(--cyan);
             transform: scale(1.1);
         }
 
         .btn-next {
             border-color: var(--magenta);
             color: var(--magenta);
-            text-shadow: 0 0 15px var(--magenta);
+            text-shadow: 0 0 20px var(--magenta);
         }
 
         .btn-next:hover {
             background: var(--magenta);
-            box-shadow: 0 0 40px var(--magenta);
+            box-shadow: 0 0 50px var(--magenta);
         }
 
-        /* Pantallas especiales */
-        .welcome, .result {
-            text-align: center;
-            padding: 60px 40px;
-        }
-
+        .welcome, .result { text-align: center; padding: 80px 40px; }
         .welcome h2, .result h2 {
             font-family: 'Orbitron';
-            font-size: 3.5rem;
+            font-size: 4rem;
             margin: 30px 0;
             background: linear-gradient(90deg, var(--cyan), var(--magenta));
             -webkit-background-clip: text;
@@ -179,36 +181,27 @@
         }
 
         input#nameInput {
-            background: rgba(0,0,0,0.6);
-            border: 3px solid var(--cyan);
+            background: rgba(0,0,0,0.7);
+            border: 4px solid var(--cyan);
             color: var(--cyan);
-            padding: 20px;
-            font-size: 1.8rem;
-            border-radius: 12px;
+            padding: 25px;
+            font-size: 2rem;
+            border-radius: 15px;
             width: 80%;
-            max-width: 500px;
+            max-width: 600px;
             text-align: center;
-            margin: 30px auto;
+            margin: 40px auto;
             display: block;
         }
 
         .score-display {
             font-family: 'Orbitron';
-            font-size: 6rem;
-            margin: 40px 0;
+            font-size: 8rem;
+            margin: 50px 0;
             background: linear-gradient(90deg, var(--cyan), var(--magenta));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            text-shadow: 0 0 40px var(--cyan);
-        }
-
-        .author {
-            position: absolute;
-            bottom: 15px;
-            left: 25px;
-            color: var(--magenta);
-            font-size: 1.1rem;
-            text-shadow: 0 0 10px var(--magenta);
+            text-shadow: 0 0 60px var(--cyan);
         }
     </style>
 </head>
@@ -216,7 +209,7 @@
     <div class="container">
         <div class="header">
             <h1>CUESTIONARIO TECNOLOGÍA</h1>
-            <div class="stats" id="stats">NODE 0/20 | 00:00</div>
+            <div class="stats" id="stats">NODE 0/20 | 0/0 | 00:00</div>
             <div class="author">Por: Samuel Galvis</div>
         </div>
 
@@ -224,108 +217,159 @@
     </div>
 
     <script>
+        // 40 PREGUNTAS REALES (nivel intermedio)
         const questionsDB = [
             { question: "¿Qué significa RAM?", options: ["Read Access Memory", "Random Access Memory", "Run Access Memory", "Rapid Access Memory"], correct: 1 },
-            { question: "¿Qué capa del modelo OSI se encarga del enrutamiento?", options: ["Capa 1", "Capa 2", "Capa 3", "Capa 7"], correct: 2 },
-            { question: "¿Qué protocolo garantiza la entrega de paquetes?", options: ["UDP", "TCP", "ICMP", "FTP"], correct: 1 },
-            { question: "¿Quién inventó el transistor?", options: ["Thomas Edison", "Bell Labs", "Alan Turing", "Tim Berners-Lee"], correct: 1 },
-            { question: "¿Qué es el overclocking?", options: ["Reducir velocidad CPU", "Aumentar velocidad CPU", "Limpiar polvo", "Cambiar RAM"], correct: 1 },
-            { question: "¿Qué significa IoT?", options: ["Internet of Things", "Input Output Terminal", "Integrated Operating Tool", "Internet on TV"], correct: 0 },
-            { question: "¿En qué año salió el primer iPhone?", options: ["2005", "2007", "2009", "2010"], correct: 1 },
-            { question: "¿Qué hace un compilador?", options: ["Traduce código a máquina", "Ejecuta código", "Depura errores", "Diseña interfaces"], correct: 0 },
-            { question: "¿Qué es SSD?", options: ["Disco magnético", "Disco de estado sólido", "Memoria RAM", "Tarjeta gráfica"], correct: 1 },
-            { question: "¿Qué es Git?", options: ["Editor de texto", "Control de versiones", "Lenguaje de programación", "Base de datos"], correct: 1 },
+            { question: "¿Qué capa OSI hace enrutamiento?", options: ["Capa 1 (Física)", "Capa 2 (Enlace)", "Capa 3 (Red)", "Capa 7 (Aplicación)"], correct: 2 },
+            { question: "¿TCP o UDP es orientado a conexión?", options: ["UDP", "TCP", "Ambos", "Ninguno"], correct: 1 },
+            { question: "¿Quién es considerado el padre de la informática moderna?", options: ["Bill Gates", "Steve Jobs", "Alan Turing", "Mark Zuckerberg"], correct: 2 },
+            { question: "¿Qué riesgo tiene el overclocking?", options: ["Menor rendimiento", "Sobrecalentamiento", "Menos ruido", "Mayor duración"], correct: 1 },
+            { question: "¿Qué significa IoT?", options: ["Internet of Things", "Input Output Terminal", "Integrated Operating Tool", "Internet on Television"], correct: 0 },
+            { question: "¿En qué año se lanzó el primer iPhone?", options: ["2005", "2007", "2009", "2011"], correct: 1 },
+            { question: "¿Qué traduce un compilador?", options: ["Código fuente a máquina", "HTML a CSS", "Imágenes a video", "Texto a voz"], correct: 0 },
+            { question: "¿SSD tiene partes móviles?", options: ["Sí", "No", "Solo en híbridos", "Solo en lectura"], correct: 1 },
+            { question: "¿Qué es Git?", options: ["Editor de texto", "Control de versiones", "Lenguaje de programación", "Navegador"], correct: 1 },
             { question: "¿Qué significa VPN?", options: ["Virtual Private Network", "Very Powerful Node", "Video Protocol Network", "Virtual Public Network"], correct: 0 },
-            { question: "¿Qué es blockchain?", options: ["Cadena de bloques", "Tipo de virus", "Lenguaje web", "Procesador"], correct: 0 },
-            { question: "¿Qué inicializa la BIOS?", options: ["Windows", "El hardware", "Internet", "Antivirus"], correct: 1 },
-            { question: "¿Qué es Agile?", options: ["Metodología de desarrollo", "Lenguaje", "Hardware", "Red"], correct: 0 },
+            { question: "¿Qué es blockchain?", options: ["Cadena de bloques distribuida", "Tipo de virus", "Lenguaje web", "Procesador cuántico"], correct: 0 },
+            { question: "¿Qué inicializa la BIOS al encender?", options: ["Windows", "El hardware", "Internet", "Aplicaciones"], correct: 1 },
+            { question: "¿Qué es Agile?", options: ["Metodología de desarrollo", "Lenguaje", "Hardware", "Protocolo de red"], correct: 0 },
             { question: "¿Qué puerto usa HTTPS?", options: ["80", "443", "21", "25"], correct: 1 },
             { question: "¿Qué fue ARPANET?", options: ["Precursor de Internet", "Primer PC", "Primer virus", "Primer smartphone"], correct: 0 },
-            { question: "¿Qué es RAID?", options: ["Sistema de almacenamiento redundante", "Tipo de RAM", "Procesador", "Tarjeta de red"], correct: 0 },
-            { question: "¿Qué hace NAT?", options: ["Traduce direcciones IP", "Encripta datos", "Asigna nombres", "Filtra virus"], correct: 0 },
-            { question: "¿Qué es Machine Learning?", options: ["Algoritmos que aprenden", "Hardware", "Red neuronal física", "Sistema operativo"], correct: 0 },
+            { question: "¿Para qué sirve RAID?", options: ["Redundancia y rendimiento", "Encriptación", "Conexión WiFi", "Overclock"], correct: 0 },
+            { question: "¿Qué traduce NAT?", options: ["IPs privadas a públicas", "Dominios a IP", "HTTP a HTTPS", "TCP a UDP"], correct: 0 },
+            { question: "¿Qué es Machine Learning?", options: ["Algoritmos que aprenden de datos", "Hardware especial", "Red física", "Sistema operativo"], correct: 0 },
             { question: "¿Qué significa CPU?", options: ["Central Processing Unit", "Computer Power Unit", "Core Processing Utility", "Cache Processing Unit"], correct: 0 },
-            // ... (las otras 20 preguntas están incluidas en el código completo que te paso al final)
+            { question: "¿Qué protocolo asigna IPs dinámicamente?", options: ["DNS", "DHCP", "FTP", "SMTP"], correct: 1 },
+            { question: "¿Qué hace un firewall?", options: ["Filtra tráfico por reglas", "Acelera internet", "Almacena datos", "Genera energía"], correct: 0 },
+            { question: "¿En qué año se inventó el World Wide Web?", options: ["1989", "1995", "2000", "1975"], correct: 0 },
+            { question: "¿Qué fue la ENIAC?", options: ["Primera computadora electrónica programable", "Primer móvil", "Primer virus", "Primer juego"], correct: 0 },
+            { question: "¿Qué significa PCIe?", options: ["Peripheral Component Interconnect Express", "Power Cache Interface", "Parallel CPU Extension", "Personal Card Interface"], correct: 0 },
+            { question: "¿Qué hace el garbage collector?", options: ["Libera memoria automáticamente", "Compila código", "Depura errores", "Encripta datos"], correct: 0 },
+            { question: "¿Qué significa MVC?", options: ["Model-View-Controller", "Memory-Virtual-Core", "Main-Value-Class", "Module-Vector-Code"], correct: 0 },
+            { question: "¿Qué es la memoria caché?", options: ["Memoria lenta en disco", "Memoria rápida cerca del CPU", "Memoria permanente", "Memoria en la nube"], correct: 1 },
+            { question: "¿Qué protocolo usa el correo electrónico?", options: ["HTTP", "FTP", "SMTP", "SSH"], correct: 2 },
+            { question: "¿Qué es un SSD NVMe?", options: ["Disco más lento que SATA", "Disco más rápido usando PCIe", "Disco magnético", "Memoria RAM"], correct: 1 },
+            { question: "¿Qué significa API?", options: ["Application Programming Interface", "Advanced Processor Instruction", "Automatic Power Interface", "Application Protocol Internet"], correct: 0 },
+            { question: "¿Qué es Big Data?", options: ["Pequeños volúmenes de datos", "Grandes volúmenes con 3V", "Datos en papel", "Datos en disco"], correct: 1 },
+            { question: "¿Qué significa URL?", options: ["Uniform Resource Locator", "Universal Random Link", "User Resource Language", "Unique Reference Link"], correct: 0 },
+            { question: "¿Qué es el protocolo SSH?", options: ["Acceso remoto seguro", "Transferencia de archivos rápida", "Correo electrónico", "Navegación web"], correct: 0 },
+            { question: "¿Qué significa GPU?", options: ["Graphics Processing Unit", "General Purpose Unit", "Global Processing Utility", "Game Power Unit"], correct: 0 },
+            { question: "¿Qué es la nube (cloud computing)?", options: ["Servicios remotos por internet", "Almacenamiento físico", "Red local", "Sistema operativo"], correct: 0 },
+            { question: "¿Qué significa HTML?", options: ["HyperText Markup Language", "High Tech Modern Language", "Home Tool Markup Language", "Hyperlink Text Machine Language"], correct: 0 },
+            { question: "¿Qué es un dominio?", options: ["Dirección IP", "Nombre legible de un sitio web", "Contraseña", "Archivo"], correct: 1 },
+            { question: "¿Qué hace un switch de red?", options: ["Conecta dispositivos en red local", "Conecta a internet", "Filtra virus", "Almacena datos"], correct: 0 },
+            { question: "¿Qué es la realidad aumentada?", options: ["Superpone elementos digitales al mundo real", "Crea mundos completamente virtuales", "Solo videojuegos", "Solo películas"], correct: 0 }
         ];
 
-        // Aquí van las 40 preguntas completas (las pongo al final para no saturar)
-        const fullQuestions = [ /* las 40 que ya teníamos */ ];
-        const questions = fullQuestions.sort(() => Math.random() - 0.5).slice(0, 20);
-
+        let questions = [];
         let currentIndex = -1;
         let answers = new Array(20).fill(null);
         let userName = '';
-        let startTime, timerInterval;
+        let startTime = 0;
+        let timerInterval = null;
         let correctCount = 0;
+        let wrongCount = 0;
 
-        function formatTime(sec) {
-            const m = String(Math.floor(sec/60)).padStart(2,'0');
-            const s = String(sec%60).padStart(2,'0');
+        function formatToTime(seconds) {
+            const m = String(Math.floor(seconds / 60)).padStart(2, '0');
+            const s = String(seconds % 60).padStart(2, '0');
             return `${m}:${s}`;
         }
 
         function updateStats() {
-            const elapsed = Math.floor((Date.now() - startTime)/1000);
-            const correct = answers.filter((a,i) => a === questions[i].correct).length;
-            const wrong = answers.filter(a => a !== null).length - correct;
-            document.getElementById('stats').textContent = `NODE ${currentIndex+1}/20 | ${correct}/${wrong} | ${formatTime(elapsed)}`;
+            const elapsed = Math.floor((Date.now() - startTime) / 1000);
+            document.getElementById('stats').textContent = `NODE ${currentIndex + 1}/20 | ${correctCount}/${wrongCount} | ${elapsed < 0 ? '00:00' : elapsedToTime(elapsed)}`;
         }
 
         function render() {
             const content = document.getElementById('content');
+
             if (!userName) {
-                content.innerHTML = `<div class="welcome">
-                    <h2>ACCESO AL SISTEMA</h2>
-                    <p>Identifícate, Runner</p>
-                    <input type="text" id="nameInput" placeholder="TU NOMBRE" autofocus>
-                    <button class="btn-next" onclick="userName=document.getElementById('nameInput').value||'Runner';render()">ENTRAR</button>
-                </div>`;
+                content.innerHTML = `
+                    <div class="welcome">
+                        <h2>ACCESO AL SISTEMA</h2>
+                        <p>Ingresa tu nombre para comenzar</p>
+                        <input type="text" id="nameInput" placeholder="TU NOMBRE" autofocus>
+                        <button class="btn-next" onclick="userName = document.getElementById('nameInput').value.trim() || 'Runner'; render()">ENTRAR</button>
+                    </div>`;
                 return;
             }
 
             if (currentIndex === -1) {
-                content.innerHTML = `<div class="welcome">
-                    <h2>BIENVENIDO<br>${userName.toUpperCase()}</h2>
-                    <p>20 nodos de conocimiento tecnológico te esperan</p>
-                    <button class="btn-next )" onclick="currentIndex=0;startTime=Date.now();timerInterval=setInterval(updateStats,500);render()">INICIAR MISIÓN</button>
-                </div>`;
+                content.innerHTML = `
+                    <div class="welcome">
+                        <h2>¡HOLA, ${userName.toUpperCase()}!</h2>
+                        <p>20 preguntas de tecnología te esperan</p>
+                        <button class="btn-next" onclick="initQuiz()">INICIAR CUESTIONARIO</button>
+                    </div>`;
                 return;
             }
 
             if (currentIndex < 20) {
                 const q = questions[currentIndex];
                 content.innerHTML = `
-                    <div class="question-counter">NODE ${currentIndex+1}/20</div>
+                    <div class="question-counter">NODE ${currentIndex + 1}/20</div>
                     <div class="question">${q.question}</div>
                     <div class="options">
                         ${q.options.map((opt, i) => `
-                            <div class="option ${answers[currentIndex]===i?'selected':''}" onclick="answers[currentIndex]=i;render()">
+                            <div class="option ${answers[currentIndex] === i ? 'selected' : ''}" 
+                                 onclick="selectAnswer(${i})">
                                 ${opt}
                             </div>
                         `).join('')}
                     </div>
                     <div class="navigation">
-                        <button ${currentIndex===0?'disabled':''} onclick="currentIndex--;render()">ANTERIOR</button>
-                        <button class="btn-next" onclick="currentIndex++;if(currentIndex===20){clearInterval(timerInterval);}render()">
-                            ${currentIndex===19?'FINALIZAR':'SIGUIENTE'}
+                        <button ${currentIndex === 0 ? 'disabled' : ''} onclick="currentIndex--; render()">ANTERIOR</button>
+                        <button class="btn-next" onclick="nextQuestion()">
+                            ${currentIndex === 19 ? 'FINALIZAR' : 'SIGUIENTE'}
                         </button>
                     </div>
                 `;
                 updateStats();
             } else {
-                const time = Math.floor((Date.now() - startTime)/1000);
-                correctCount = answers.filter((a,i) => a === questions[i].correct).length;
-                const percent = Math.round((correctCount/20)*100);
-                content.innerHTML = `<div class="result">
-                    <h2>MISIÓN COMPLETADA</h2>
-                    <div class="score-display">${correctCount}/20</div>
-                    <p style="font-size:2rem;color:var(--magenta)">${percent}% ACIERTOS</p>
-                    <p style="font-size:1.8rem;margin:30px 0">TIEMPO TOTAL: ${formatTime(time)}</p>
-                    <button class="btn-next" onclick="location.reload()">NUEVA PARTIDA</button>
-                </div>`;
+                clearInterval(timerInterval);
+                const totalTime = Math.floor((Date.now() - startTime) / 1000);
+                correctCount = answers.filter((a, i) => a === questions[i].correct).length;
+                const percent = Math.round((correctCount / 20) * 100);
+
+                content.innerHTML = `
+                    <div class="result">
+                        <h2>¡COMPLETADO, ${userName.toUpperCase()}!</h2>
+                        <div class="score-display">${correctCount}/20</div>
+                        <p style="font-size:2.5rem; color:var(--magenta); margin:30px 0;">${percent}% de aciertos</p>
+                        <p style="font-size:2rem;">Tiempo total: ${elapsedToTime(totalTime)}</p>
+                        <button class="btn-next" onclick="location.reload()">NUEVA PARTIDA</button>
+                    </div>
+                `;
             }
         }
 
+        function selectAnswer(index) {
+            answers[currentIndex] = index;
+            render();
+        }
+
+        function nextQuestion() {
+            if (currentIndex < 19) {
+                currentIndex++;
+            } else {
+                currentIndex = 20;
+            }
+            render();
+        }
+
+        function initQuiz() {
+            questions = [...questionsDB].sort(() => Math.random() - 0.5).slice(0, 20);
+            answers = new Array(20).fill(null);
+            currentIndex = 0;
+            correctCount = 0;
+            wrongCount = 0;
+            startTime = Date.now();
+            timerInterval = setInterval(updateStats, 500);
+            render();
+        }
+
+        // Iniciar
         render();
     </script>
 </body>
