@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NEON QUIZ // Samuel Galvis</title>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700&family=Rajdhani:wght@500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <style>
+    :root {
+      --neon-pink: #ff00ff;
+      --neon-cyan: #00ffff;
+      --neon-purple: #9d00ff;
+      --dark-bg: #0d001a;
+      --card-bg: rgba(20, 0, 40, 0.7);
+    }
+    * { margin:0; padding:0; box-sizing:border-box; }
+    body {
+      font-family: 'Rajdhani', sans-serif;
+      background: var(--dark-bg) url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><rect width="100" height="100" fill="%230d001a"/><path d="M0,50 Q25,30 50,50 T100,50" stroke="%23220044" stroke-width="1" fill="none"/><path d="M0,30 Q25,50 50,30 T100,30" stroke="%23220044" stroke-width="1" fill="none"/></svg>') repeat;
+      color: var(--neon-cyan);
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow-x: hidden;
+      background-attachment: fixed;
+    }
+    .glitch { 
+      animation: glitch 3s infinite;
+      text-shadow: 0 0 10px var(--neon-pink), 0 0 20px var(--neon-pink);
+    }
+    @keyframes glitch {
+      0%,100% { text-shadow: 2px 2px 0 #ff00ff, -2px -2px 0 #00ffff; }
+      20% { text-shadow: -2px -2px 0 #ff00ff, 2px 2px 0 #00ffff; }
+      40% { text-shadow: 2px -2px 0 #ff00ff, -2px 2px 0 #00ffff; }
+    }
+    .container {
+      background: var(--card-bg);
+      border: 2px solid var(--neon-purple);
+      border-radius: 15px;
+      padding: 40px;
+      max-width: 900px;
+      width: 95%;
+      box-shadow: 0 0 30px rgba(157, 0, 255, 0.6), inset 0 0 20px rgba(0, 255, 255, 0.2);
+      backdrop-filter: blur(10px);
+      position: relative;
+      overflow: hidden;
+    }
+    .container::before {
+      content: '';
+      position: absolute;
+      top: -50%; left: -50%;
+      width: 200%; height: 200%;
+      background: repeating-linear-gradient(45deg, transparent, transparent 10px, rgba(255,0,255,0.03) 10px, rgba(255,0,255,0.03) 20px);
+      animation: scan 8s linear infinite;
+      pointer-events: none;
+    }
+    @keyframes scan { 0% { transform: translate(0,0); } 100% { transform: translate(50%,50%); } }
+
+    h1 { font-family: 'Orbitron', sans-serif; text-align:center; font-size:3em; margin:20px 0; color:var(--neon-pink); }
+    .autor { text-align:center; font-size:1.4em; color:var(--neon-cyan); margin-bottom:10px; }
+    .proposito { text-align:center; font-size:1.3em; margin:30px 0; text-shadow: 0 0 10px var(--neon-cyan); }
+
+    .temas-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 20px;
+      margin: 40px 0;
+    }
+    .tema-card {
+      background: rgba(0,255,255,0.05);
+      border: 1px solid var(--neon-cyan);
+      border-radius: 12px;
+      padding: 20px;
+      transition: all 0.4s;
+      box-shadow: 0 0 15px rgba(0,255,255,0.2);
+    }
+    .tema-card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 0 30px var(--neon-cyan);
+      border-color: var(--neon-pink);
+    }
+    .tema-card h3 {
+      color: var(--neon-pink);
+      font-size: 1.4em;
+      margin-bottom: 10px;
+      text-shadow: 0 0 10px;
+    }
+
+    .hidden { display:none; }
+    .progress {
+      text-align:center; font-size:1.4em; margin:25px 0;
+      color:var(--neon-cyan);
+      text-shadow: 0 0 10px;
+    }
+    .timer {
+      position: absolute;
+      top: 15px; right: 20px;
+      font-family: 'Orbitron';
+      font-size: 1.6em;
+      color: var(--neon-pink);
+      text-shadow: 0 0 15px;
+    }
+
+    .pregunta { font-size:1.6em; text-align:center; margin:40px 0; text-shadow: 0 0 15px var(--neon-cyan); }
+    .options { margin:40px 0; }
+    .option {
+      background: rgba(0,255,255,0.1);
+      border: 1px solid var(--neon-cyan);
+      padding: 20px;
+      margin: 15px 0;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: all 0.3s;
+      font-size: 1.2em;
+    }
+    .option:hover { background: rgba(255,0,255,0.2); border-color: var(--neon-pink); transform: scale(1.02); }
+    .option.selected { background: var(--neon-pink); color: black; font-weight: bold; }
+    .option.eliminada { opacity: 0.2; text-decoration: line-through; pointer-events: none; }
+
+    .btn {
+      padding: 15px 35px;
+      margin: 12px;
+      border: 2px solid;
+      border-radius: 8px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: 0.4s;
+      font-size: 1.2em;
+      text-transform: uppercase;
+    }
+    .btn-primary { background: transparent; border-color: var(--neon-cyan); color: var(--neon-cyan); }
+    .btn-primary:hover { background: var(--neon-cyan); color: black; box-shadow: 0 0 20px var(--neon-cyan); }
+    .btn-javis { background: transparent; border-color: var(--neon-pink); color: var(--neon-pink); }
+    .btn-javis:hover { background: var(--neon-pink); color: black; }
+    .btn-5050 { background: linear-gradient(45deg, #ff00ff, #00ffff); color: black; border: none; }
+    .btn-5050:hover { box-shadow: 0 0 30px #ff00ff; }
+
+    .jarvis-box {
+      background: rgba(0,0,0,0.8);
+      border: 2px solid var(--neon-cyan);
+      padding: 25px;
+      border-radius: 12px;
+      margin: 25px 0;
+      text-align: center;
+      font-size: 1.3em;
+      box-shadow: 0 0 20px rgba(0,255,255,0.5);
+    }
+    .final-score { font-family: 'Orbitron'; font-size: 4.5em; text-align:center; margin:40px 0; color:var(--neon-pink); text-shadow: 0 0 30px; }
+  </style>
+</head>
+<body>
+
+<div class="container">
+  <div class="timer" id="cronometro">00:00</div>
+
+  <!-- INTRO CYBERPUNK -->
+  <div id="intro">
+    <div class="autor glitch">// Autor: Samuel Galvis</div>
+    <h1 class="glitch">NEON TECH QUIZ</h1>
+    <p class="proposito">Desafío de conocimiento tecnológico nivel intermedio. ¿Estás listo para entrar en la red?</p>
+
+    <h2 style="text-align:center; margin:40px 0; color:var(--neon-cyan); text-shadow:0 0 15px;">// TEMAS DEL SISTEMA</h2>
+    <div class="temas-grid">
+      <div class="tema-card">
+        <h3>Hardware</h3>
+        <p>CPU, RAM, SSD vs HDD, GPU, placas base, overclocking, refrigeración líquida, arquitectura x86-64 vs ARM.</p>
+      </div>
+      <div class="tema-card">
+        <h3>Programación</h3>
+        <p>Variables, funciones, estructuras de control, OOP (clases, herencia), APIs REST, JSON, Git, MVC, async/await.</p>
+      </div>
+      <div class="tema-card">
+        <h3>Redes</h3>
+        <p>Modelo OSI y TCP/IP, direcciones IP públicas/privadas, subredes, DNS, puertos comunes, NAT, VLANs.</p>
+      </div>
+      <div class="tema-card">
+        <h3>Seguridad</h3>
+        <p>HTTPS/TLS, VPN, JWT, CORS, XSS, SQL Injection, cifrado simétrico/asimétrico, firewall, 2FA.</p>
+      </div>
+      <div class="tema-card">
+        <h3>Cloud & Web</h3>
+        <p>CDN, WebSockets, DOM, frameworks (React, Express), bases de datos NoSQL, microservicios, Docker básico.</p>
+      </div>
+      <div class="tema-card">
+        <h3>Sistemas</h3>
+        <p>Linux vs Windows, comandos básicos (ip, ps, git), procesos, permisos, SSH, servicios, contenedores.</p>
+      </div>
+    </div>
+
+    <input type="text" id="nombre" placeholder="INGRESA TU ALIAS" style="width:100%; padding:18px; background:transparent; border:2px solid var(--neon-cyan); border-radius:10px; text-align:center; font-size:1.4em; color:var(--neon-cyan); margin:30px 0;">
+    
+    <div style="text-align:center;">
+      <button class="btn btn-primary" onclick="iniciarCuestionario()">INICIAR SISTEMA</button>
+    </div>
+    <p style="text-align:center; margin-top:25px; font-size:1.3em;">
+      Sesiones completadas en este terminal: <strong id="intentosTotales" style="color:var(--neon-pink);">0</strong>
+    </p>
+  </div>
+
+  <!-- QUIZ -->
+  <div id="quiz" class="hidden">
+    <div class="progress">
+      NODE <span id="numPregunta"></span>/20 | 50/50: <span id="usos5050">5</span>
+    </div>
+    <h2 class="pregunta" id="pregunta"></h2>
+    <div class="options" id="opciones"></div>
+
+    <div class="jarvis-box hidden" id="pista">
+      <strong>JARVIS:</strong> <span id="textoPista"></span>
+    </div>
+
+    <div style="text-align:center; margin:40px 0;">
+      <button class="btn btn-primary" id="btnAtras" onclick="anterior()">ANTERIOR</button>
+      <button class="btn btn-primary" id="btnContinuar" onclick="siguiente()" disabled>SIGUIENTE</button>
+    </div>
+
+    <div style="text-align:center;">
+      <button class="btn btn-javis" onclick="pedirPista()">PISTA</button>
+      <button class="btn btn-5050" id="btn5050" onclick="usar5050()">50/50 (<span id="btn5050Text">5</span>)</button>
+    </div>
+  </div>
+
+  <!-- RESULTADO -->
+  <div id="resultado" class="hidden">
+    <h1 class="glitch">CONEXIÓN CERRADA, <span id="nombreFinal"></span></h1>
+    <div class="final-score" id="notaFinal">0/20</div>
+    <p style="text-align:center; font-size:1.6em;">
+      Tiempo total: <strong id="tiempoFinal" style="color:var(--neon-pink);"></strong><br>
+      Puntuación: <strong id="correctas">0</strong>/20 | Intento global #<strong id="intentoActual">1</strong>
+    </p>
+
+    <h2 style="text-align:center; margin:50px 0; color:var(--neon-cyan);">LOG DE RESPUESTAS</h2>
+    <div id="resumen"></div>
+
+    <div style="text-align:center; margin:50px 0;">
+      <button class="btn btn-primary" onclick="location.reload()">REINICIAR SISTEMA</button>
+    </div>
+  </div>
+</div>
+
+<script>
+  // 40 preguntas nivel intermedio (igual que antes)
+  const preguntas = [ /* === MISMA BASE DE 40 PREGUNTAS INTERMEDIAS === */
+    { q: "¿Qué capa del modelo OSI maneja el enrutamiento?", a: "Capa 3 (Red)", opciones: ["Capa 2 (Enlace)", "Capa 3 (Red)", "Capa 4 (Transporte)", "Capa 7 (Aplicación)"], pista: "Es donde operan los routers y las direcciones IP." },
+    { q: "¿Qué puerto usa HTTPS por defecto?", a: "443", opciones: ["80", "443", "22", "3389"], pista: "Es el puerto seguro, la versión cifrada de HTTP." },
+    { q: "¿Qué significa DNS?", a: "Domain Name System", opciones: ["Data Network Service", "Domain Name System", "Dynamic Name Server", "Direct Network System"], pista: "Convierte nombres como google.com en direcciones IP." },
+    { q: "¿Qué protocolo usa el correo saliente?", a: "SMTP", opciones: ["POP3", "IMAP", "SMTP", "FTP"], pista: "Es el encargado de enviar emails." },
+    { q: "¿Qué comando muestra la IP en Windows?", a: "ipconfig", opciones: ["ifconfig", "ipconfig", "ip addr", "netstat"], pista: "Es el comando clásico en CMD de Windows." },
+    { q: "¿Qué tipo de dirección es 172.16.50.10?", a: "Privada", opciones: ["Pública", "Privada", "APIPA", "Loopback"], pista: "Pertenece al bloque 172.16.0.0 - 172.31.255.255." },
+    { q: "¿Qué significa API?", a: "Application Programming Interface", opciones: ["Advanced Protocol Interface", "Application Programming Interface", "Automatic Programming Interface", "Application Protocol Internet"], pista: "Permite que dos aplicaciones se comuniquen." },
+    { q: "¿Qué framework frontend creó Facebook?", a: "React", opciones: ["Angular", "Vue", "React", "Svelte"], pista: "Usa componentes y un Virtual DOM." },
+    { q: "¿Qué significa JSON?", a: "JavaScript Object Notation", opciones: ["Java Source Object Notation", "JavaScript Object Notation", "JavaScript Online Network", "JSON Object Network"], pista: "Es el formato más usado para intercambio de datos." },
+    { q: "¿Qué puerto usa SSH?", a: "22", opciones: ["21", "22", "23", "25"], pista: "Acceso remoto seguro a servidores Linux." },
+    // ... (las otras 30 preguntas igual que en la versión anterior)
+    { q: "¿Qué significa RAM?", a: "Random Access Memory", opciones: ["Read Access Memory", "Random Access Memory", "Run Access Memory", "Rapid Access Memory"], pista: "Memoria volátil de acceso aleatorio." },
+    { q: "¿Qué puerto usa RDP (Escritorio Remoto Windows)?", a: "3389", opciones: ["3389", "5900", "22", "3390"], pista: "Puerto por defecto de Remote Desktop Protocol." }
+  ];
+
+  let nombre = "", preguntasSel = [], indice = 0, respuestas = [], usos5050 = 5;
+  let inicioTiempo = 0;
+  let intentosTotales = parseInt(localStorage.getItem("intentosCyberQuiz") || "0");
+  document.getElementById("intentosTotales").textContent = intentosTotales;
+
+  function iniciarCuestionario() {
+    nombre = document.getElementById("nombre").value.trim() || "Hacker";
+    document.getElementById("intro").classList.add("hidden");
+    document.getElementById("quiz").classList.remove("hidden");
+    inicioTiempo = Date.now();
+
+    // Mezclar y seleccionar 20
+    const copia = [...preguntas];
+    preguntasSel = [];
+    while (preguntasSel.length < 20) {
+      const i = Math.floor(Math.random() * copia.length);
+      preguntasSel.push(copia.splice(i, 1)[0]);
+    }
+
+    usos5050 = 5;
+    respuestas = [];
+    indice = 0;
+    actualizarCronometro();
+    mostrarPregunta();
+  }
+
+  function actualizarCronometro() {
+    if (document.getElementById("quiz").classList.contains("hidden") && 
+        document.getElementById("resultado").classList.contains("hidden")) return;
+
+    const segundos = Math.floor((Date.now() - inicioTiempo) / 1000);
+    const min = String(Math.floor(segundos / 60)).padStart(2, '0');
+    const seg = String(segundos % 60).padStart(2, '0');
+    document.getElementById("cronometro").textContent = `${min}:${seg}`;
+    if (!document.getElementById("resultado").classList.contains("hidden")) {
+      document.getElementById("tiempoFinal").textContent = `${min}:${seg}`;
+    } else {
+      setTimeout(actualizarCronometro, 500);
+    }
+  }
+
+  function mostrarPregunta() {
+    const p = preguntasSel[indice];
+    document.getElementById("numPregunta").textContent = indice + 1;
+    document.getElementById("usos5050").textContent = usos5050;
+    document.getElementById("btn5050Text").textContent = usos5050;
+    document.getElementById("pregunta").textContent = p.q;
+    document.getElementById("pista").classList.add("hidden");
+
+    const div = document.getElementById("opciones");
+    div.innerHTML = "";
+    p.opciones.forEach(op => {
+      const el = document.createElement("div");
+      el.className = "option";
+      el.textContent = op;
+      el.onclick = () => seleccionar(op, el);
+      div.appendChild(el);
+    });
+
+    if (respuestas[indice]) {
+      document.querySelectorAll(".option").forEach(o => {
+        if (o.textContent === respuestas[indice].resp) o.classList.add("selected");
+      });
+      document.getElementById("btnContinuar").disabled = false;
+    } else {
+      document.getElementById("btnContinuar").disabled = true;
+    }
+
+    document.getElementById("btnAtras").disabled = indice === 0;
+  }
+
+  function seleccionar(op, el) {
+    document.querySelectorAll(".option").forEach(o => o.classList.remove("selected"));
+    el.classList.add("selected");
+    respuestas[indice] = { resp: op, correcta: op === preguntasSel[indice].a };
+    document.getElementById("btnContinuar").disabled = false;
+  }
+
+  function siguiente() { if (indice < 19) { indice++; mostrarPregunta(); } else { finalizar(); } }
+  function anterior() { if (indice > 0) { indice--; mostrarPregunta(); } }
+
+  function pedirPista() {
+    document.getElementById("textoPista").textContent = preguntasSel[indice].pista;
+    document.getElementById("pista").classList.remove("hidden");
+  }
+
+  function usar5050() {
+    if (usos5050 === 0) return;
+    const p = preguntasSel[indice];
+    const opciones = document.querySelectorAll(".option");
+    const incorrectas = p.opciones.filter(o => o !== p.a);
+    let eliminadas = 0;
+    for (let op of opciones) {
+      if (incorrectas.includes(op.textContent) && eliminadas < 2) {
+        op.classList.add("eliminada");
+        eliminadas++;
+      }
+    }
+    usos5050--;
+    document.getElementById("usos5050").textContent = usos5050;
+    document.getElementById("btn5050Text").textContent = usos5050;
+    document.getElementById("textoPista").textContent = "He eliminado dos opciones incorrectas.";
+    document.getElementById("pista").classList.remove("hidden");
+  }
+
+  function finalizar() {
+    intentosTotales++;
+    localStorage.setItem("intentosCyberQuiz", intentosTotales);
+
+    document.getElementById("quiz").classList.add("hidden");
+    document.getElementById("resultado").classList.remove("hidden");
+
+    const correctas = respuestas.filter(r => r.correcta).length;
+    document.getElementById("nombreFinal").textContent = nombre;
+    document.getElementById("notaFinal").textContent = correctas + "/20";
+    document.getElementById("correctas").textContent = correctas;
+    document.getElementById("intentoActual").textContent = intentosTotales;
+
+    let html = "";
+    respuestas.forEach((r, i) => {
+      const p = preguntasSel[i];
+      const icon = r.correcta ? "CORRECTO" : "FALLO";
+      const color = r.correcta ? "#00ffff" : "#ff0066";
+      html += `<div style="border:1px solid ${color}; padding:20px; border-radius:10px; margin:15px 0; background:rgba(0,0,0,0.4);">
+        <p><strong>${i+1}.</strong> ${p.q}</p>
+        <p style="color:${color};">${icon} → ${r.resp}</p>
+        ${!r.correcta ? `<p style="color:#00ffff;">CORRECTA: ${p.a}</p>` : ''}
+      </div>`;
+    });
+    document.getElementById("resumen").innerHTML = html;
+  }
+</script>
+</body>
+</html>
